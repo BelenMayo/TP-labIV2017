@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PersonasService } from './servicios/personas.service';
+import { PizzeriaService } from './servicios/pizzeria.service';
 import { HttpModule, Http } from '@angular/http';
 
 import { FileUploader } from 'ng2-file-upload';
@@ -26,50 +26,43 @@ export class AppComponent {
     this.hasAnotherDropZoneOver = e;
   }
 
-  title: string= 'Listado de Personas';
-  esFemenino:boolean = true;
+  title: string= 'Listado de Pizzas';
   public mostrar: any;
 
   public nombre: string= "";
-  public apellido: string= "";
-  public sexo: string= "";
-  public dni: string= "";
+  public precio: string= "";
   public foto: string= "";
-  public password: string= "";
 
-  public datosPersonas: Array<any>;
+  public datosPizzas: Array<any>;
 
-  constructor(public datosPers: PersonasService){
-    console.log(this.datosPersonas);
-    datosPers.traerTodasLasPersonas()
-    .then(datosPers => {
-      console.info("datos persona", datosPers);
-      this.datosPersonas= datosPers;
+  constructor(public datosPizz: PizzeriaService){
+    console.log(this.datosPizzas);
+    datosPizz.traerTodasLasPizzas()
+    .then(datosPizz => {
+      console.info("datos pizza", datosPizz);
+      this.datosPizzas= datosPizz;
     })
   }
 
   traerUnaPersona($id){
-    this.datosPers.traerUnaPersona($id)
-      .then(datosPers => {
-      console.info("datos persona", datosPers);
-      this.datosPersonas= datosPers;
+    this.datosPizz.traerUnaPizza($id)
+      .then(datosPizz => {
+      console.info("datos pizza", datosPizz);
+      this.datosPizzas= datosPizz;
     })
   }
 
-  borrarPersona($id){
-    this.datosPers.eliminarPersona($id);
+  borrarPizza($id){
+    this.datosPizz.eliminarPizza($id);
   }
   
-  altaPersona(){
-    alert(this.nombre + " " + this.apellido + " " + this.dni + " " + this.sexo + " " + this.foto + " " + this.password); 
-    let nuevaPersona={nombre:this.nombre,
-                      apellido:this.apellido,
-                      dni:this.dni,
-                      sexo:this.sexo,
+  altaPizza(){
+    alert(this.nombre + " " + this.precio + " " + this.foto); 
+    let nuevaPizza={nombre:this.nombre,
+                      apellido:this.precio,
                       foto:this.foto,
-                      password:this.password
                     };
-    this.datosPers.agregarPersona(nuevaPersona);
+    this.datosPizz.agregarPizza(nuevaPizza);
   }
 
 }

@@ -16,37 +16,20 @@
     <tr>
       <th>ID</th>
       <th>NOMBRE</th>
-      <th>APELLIDO</th>
-      <th>SEXO</th>
-      <th>DNI</th>
+      <th>PRECIO</th>
       <th>FOTO</th>
-      <th>PASSWORD</th>
       <th>FILTRAR</th>
       <th>BORRAR</th>
     </tr>
   </thead>
-  <tbody *ngFor="let datos of datosPersonas"> 
-    <tr *ngIf="datos.sexo == 'Femenino'" style= "color: #FC41CD; font-weight: bold; font-style: italic;">
+  <tbody *ngFor="let datos of datosPizzas"> 
+    <tr>
       <td><strong> {{ datos.id }} </strong></td>
       <td> {{ datos.nombre }} </td>
-      <td>{{ datos.apellido }} </td>
-      <td>{{ datos.sexo }} </td>
-      <td> {{ datos.dni }} </td>
+      <td>{{ datos.precio }} </td>
       <td> <img src="./assets/fotos/{{ datos.foto }}" width="75px" height="75px"> </td>
-      <td> {{ datos.password }} </td>
-      <td> <button (click)="traerUnaPersona(datos.id)"> FILTRAR </button> </td>
-      <td> <button (click)="borrarPersona(datos.id)"> BORRAR </button> </td>
-    </tr>
-    <tr *ngIf="datos.sexo != 'Femenino'" style= "color: #0101DF;font-weight: bold;">
-      <td><strong> {{ datos.id }} </strong></td>
-      <td> {{ datos.nombre }} </td>
-      <td>{{ datos.apellido }} </td>
-      <td>{{ datos.sexo }} </td>
-      <td> {{ datos.dni }} </td>
-      <td> <img src="./assets/fotos/{{ datos.foto }}" width="75px" height="75px"> </td>
-      <td> {{ datos.password }} </td>
-      <td> <button (click)="traerUnaPersona(datos.id)"> FILTRAR </button> </td>
-      <td> <button (click)="borrarPersona(datos.id)"> BORRAR </button> </td>
+      <td> <button (click)="traerUnaPizza(datos.id)"> FILTRAR </button> </td>
+      <td> <button (click)="borrarPizza(datos.id)"> BORRAR </button> </td>
     </tr>
   </tbody>
 </table>
@@ -58,16 +41,10 @@
 				<div class="form-group">
 					<label>Nombre</label>
 					<input type="text" class="form-control" [(ngModel)]="nombre" name="nombre" placeholder="Nombre.." required >
-					<label>Apellido</label>
-					<input type="text" class="form-control" [(ngModel)]="apellido" name="apellido" placeholder="Apellido.." required>
-					<label>Sexo</label>
-					<input type="text" class="form-control" [(ngModel)]="sexo" name="sexo" placeholder="Sexo..">
-					<label>Dni</label>
-					<input type="text" class="form-control" [(ngModel)]="dni" name="dni" placeholder="DNI..">
+					<label>Precio</label>
+					<input type="text" class="form-control" [(ngModel)]="precio" name="precio" placeholder="Precio.." required>
 					<label>Foto</label>
 					<input type="text" class="form-control" [(ngModel)]="foto" name="foto" placeholder="Foto..">
-					<label>Password</label>
-					<input type="text" class="form-control"[(ngModel)]="password" name="password" placeholder="Password..">
 				</div>
 
 				<input type="button" (click)="altaPersona()" class="btn btn-primary" value="Guardar" />

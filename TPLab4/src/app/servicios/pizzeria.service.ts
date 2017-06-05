@@ -3,13 +3,13 @@ import { Http, Response, RequestOptions, URLSearchParams, Headers} from '@angula
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class PersonasService {
+export class PizzeriaService {
 
   constructor(public http:Http) { }
 
-  traerTodasLasPersonas(){
+  traerTodasLasPizzas(){
     //URL de API REST(funciones.js)
-    let url= 'http://localhost:8080/abm_apirest/apirest.php/traerTodos'; 
+    let url= 'http://localhost:8080/api_pizzeria/apirest.php/traerTodas'; 
     
       return this.http
         .get(url)
@@ -18,8 +18,8 @@ export class PersonasService {
         .catch(this.error);
   }
 
-  traerUnaPersona(idPersona){
-    let url= 'http://localhost:8080/abm_apirest/apirest.php/traerUno/' + idPersona; 
+  traerUnaPizza(idPizza){
+    let url= 'http://localhost:8080/api_pizzeria/apirest.php/traerUna/' + idPizza; 
     
       return this.http
         .get(url)
@@ -28,8 +28,8 @@ export class PersonasService {
         .catch(this.error);
   }
 
-  eliminarPersona(idPersona) {
-    let datos = {"id": idPersona};
+  eliminarPizza(idPizza) {
+    let datos = {"id": idPizza};
 
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({
@@ -37,22 +37,19 @@ export class PersonasService {
     body : datos
   });
     
-    this.http.delete("http://localhost:8080/abm_apirest/apirest.php/registro", options)
+    this.http.delete("http://localhost:8080/api_pizzeria/apirest.php/registro", options)
              .toPromise()
              .then()
              .catch(this.error)
   }
 
-  agregarPersona(persona) {
-    let datos={ nombre:persona.nombre,
-                apellido :persona.apellido,
-                sexo:persona.sexo,
-                dni:persona.dni,
-                foto:persona.foto,
-                password:persona.password
+  agregarPizza(pizza) {
+    let datos={ nombre:pizza.nombre,
+                precio :pizza.precio,
+                foto:pizza.foto,
               };
     
-    this.http.post("http://localhost:8080/abm_apirest/apirest.php/registro", datos)
+    this.http.post("http://localhost:8080/api_pizzeria/apirest.php/registro", datos)
              .toPromise()
              .then()
              .catch(this.error)
