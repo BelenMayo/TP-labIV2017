@@ -14,18 +14,6 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 })
 export class AppComponent {
 
-  public uploader:FileUploader = new FileUploader({url: URL});
-  public hasBaseDropZoneOver:boolean = false;
-  public hasAnotherDropZoneOver:boolean = false;
- 
-  public fileOverBase(e:any):void {
-    this.hasBaseDropZoneOver = e;
-  }
- 
-  public fileOverAnother(e:any):void {
-    this.hasAnotherDropZoneOver = e;
-  }
-
   title: string= 'Listado de Pizzas';
   public mostrar: any;
 
@@ -57,9 +45,8 @@ export class AppComponent {
   }
   
   altaPizza(){
-    alert(this.nombre + " " + this.precio + " " + this.foto); 
     let nuevaPizza={nombre:this.nombre,
-                      apellido:this.precio,
+                      precio:this.precio,
                       foto:this.foto,
                     };
     this.datosPizz.agregarPizza(nuevaPizza);

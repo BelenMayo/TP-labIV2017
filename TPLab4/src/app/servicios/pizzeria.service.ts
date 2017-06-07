@@ -9,7 +9,7 @@ export class PizzeriaService {
 
   traerTodasLasPizzas(){
     //URL de API REST(funciones.js)
-    let url= 'http://localhost:8080/api_pizzeria/apirest.php/traerTodas'; 
+    let url= 'http://localhost:8080/ApiLab4SP/public/index.php/pizzas'; 
     
       return this.http
         .get(url)
@@ -19,7 +19,7 @@ export class PizzeriaService {
   }
 
   traerUnaPizza(idPizza){
-    let url= 'http://localhost:8080/api_pizzeria/apirest.php/traerUna/' + idPizza; 
+    let url= 'http://localhost:8080/ApiLab4SP/public/index.php/pizzas' + idPizza; 
     
       return this.http
         .get(url)
@@ -28,28 +28,28 @@ export class PizzeriaService {
         .catch(this.error);
   }
 
-  eliminarPizza(idPizza) {
-    let datos = {"id": idPizza};
-
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({
-    headers: headers,
-    body : datos
-  });
-    
-    this.http.delete("http://localhost:8080/api_pizzeria/apirest.php/registro", options)
-             .toPromise()
-             .then()
-             .catch(this.error)
-  }
-
   agregarPizza(pizza) {
     let datos={ nombre:pizza.nombre,
                 precio :pizza.precio,
                 foto:pizza.foto,
               };
     
-    this.http.post("http://localhost:8080/api_pizzeria/apirest.php/registro", datos)
+    this.http.post("http://localhost:8080/ApiLab4SP/public/index.php/pizza/alta", datos)
+             .toPromise()
+             .then()
+             .catch(this.error)
+  }
+
+
+  eliminarPizza(idPizza) {
+    let datos = {"id": idPizza};
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({
+    headers: headers,
+    body : datos
+  });
+    
+    this.http.delete("http://localhost:8080/ApiLab4SP/public/index.php/pizza/borrar/" + idPizza)
              .toPromise()
              .then()
              .catch(this.error)
