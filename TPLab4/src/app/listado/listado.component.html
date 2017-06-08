@@ -1,0 +1,51 @@
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="jquery.js"></script>
+</head>	
+
+<h2>
+   {{title}}
+</h2>
+ <input type="checkbox" id="editar" [(ngModel)]="mostrar" ng-checked = "true" style="margin: 25px;"><label style="font-style: italic;">EDITAR</label>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>NOMBRE</th>
+      <th>PRECIO</th>
+      <th>FOTO</th>
+      <th>FILTRAR</th>
+      <th>BORRAR</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let datos of datosPizzas"> 
+    <tr>
+      <td><strong> {{ datos.id }} </strong></td>
+      <td> {{ datos.nombre }} </td>
+      <td>{{ datos.precio }} </td>
+      <td> <img src="./assets/fotos/{{ datos.foto }}" width="75px" height="75px"> </td>
+      <td> <button (click)="traerUnaPizza(datos.id)"> FILTRAR </button> </td>
+      <td> <button (click)="borrarPizza(datos.id)"> BORRAR </button> </td>
+    </tr>
+  </tbody>
+</table>
+
+		<div class="container" *ngIf="mostrar == true">
+			<form style="margin:0 auto;max-width:600px;padding:15px;background-color:#C4C5F3;">
+				<legend>Alta</legend>
+
+				<div class="form-group">
+					<label>Nombre</label>
+					<input type="text" class="form-control" [(ngModel)]="nombre" name="nombre" placeholder="Nombre.." required >
+					<label>Precio</label>
+					<input type="text" class="form-control" [(ngModel)]="precio" name="precio" placeholder="Precio.." required>
+					<label>Foto</label>
+					<input type="text" class="form-control" [(ngModel)]="foto" name="foto" placeholder="Foto..">
+				</div>
+
+				<input type="button" (click)="altaPizza()" class="btn btn-primary" value="Guardar" />
+			</form>
