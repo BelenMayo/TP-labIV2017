@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { PizzeriaService } from './servicios/pizzeria.service';
 import { FileUploadModule } from 'ng2-file-upload';
+import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { AppComponent } from './app.component';
 import { ListadoComponent } from './listado/listado.component';
@@ -25,7 +26,8 @@ import { PedidosComponent } from './pedidos/pedidos.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    FileUploadModule
+    FileUploadModule,
+    Ng2BootstrapModule
   ],
   providers: [PizzeriaService],
   bootstrap: [AppComponent]
