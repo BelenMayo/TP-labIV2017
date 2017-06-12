@@ -10,185 +10,6 @@
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-  body {
-      font: 400 15px Lato, sans-serif;
-      line-height: 1.8;
-      color: #818181;
-  }
-  h2 {
-      font-size: 24px;
-      text-transform: uppercase;
-      color: #303030;
-      font-weight: 600;
-      margin-bottom: 30px;
-  }
-  h4 {
-      font-size: 19px;
-      line-height: 1.375em;
-      color: #303030;
-      font-weight: 400;
-      margin-bottom: 30px;
-  }  
-  .jumbotron {
-      background-color: #f4511e;
-      color: #fff;
-      padding: 100px 25px;
-      font-family: Montserrat, sans-serif;
-  }
-  .container-fluid {
-      padding: 60px 50px;
-  }
-  .bg-grey {
-      background-color: #f6f6f6;
-  }
-  .logo-small {
-      color: #f4511e;
-      font-size: 50px;
-  }
-  .logo {
-      color: #f4511e;
-      font-size: 200px;
-  }
-  .thumbnail {
-      padding: 0 0 15px 0;
-      border: none;
-      border-radius: 0;
-  }
-  .thumbnail img {
-      width: 100%;
-      height: 100%;
-      margin-bottom: 10px;
-  }
-  .carousel-control.right, .carousel-control.left {
-      background-image: none;
-      color: #f4511e;
-  }
-  .carousel-indicators li {
-      border-color: #f4511e;
-  }
-  .carousel-indicators li.active {
-      background-color: #f4511e;
-  }
-  .item h4 {
-      font-size: 19px;
-      line-height: 1.375em;
-      font-weight: 400;
-      font-style: italic;
-      margin: 70px 0;
-  }
-  .item span {
-      font-style: normal;
-  }
-  .panel {
-      border: 1px solid #f4511e; 
-      border-radius:0 !important;
-      transition: box-shadow 0.5s;
-  }
-  .panel:hover {
-      box-shadow: 5px 0px 40px rgba(0,0,0, .2);
-  }
-  .panel-footer .btn:hover {
-      border: 1px solid #f4511e;
-      background-color: #fff !important;
-      color: #f4511e;
-  }
-  .panel-heading {
-      color: #fff !important;
-      background-color: #f4511e !important;
-      padding: 25px;
-      border-bottom: 1px solid transparent;
-      border-top-left-radius: 0px;
-      border-top-right-radius: 0px;
-      border-bottom-left-radius: 0px;
-      border-bottom-right-radius: 0px;
-  }
-  .panel-footer {
-      background-color: white !important;
-  }
-  .panel-footer h3 {
-      font-size: 32px;
-  }
-  .panel-footer h4 {
-      color: #aaa;
-      font-size: 14px;
-  }
-  .panel-footer .btn {
-      margin: 15px 0;
-      background-color: #f4511e;
-      color: #fff;
-  }
-  .navbar {
-      margin-bottom: 0;
-      background-color: #f4511e;
-      z-index: 9999;
-      border: 0;
-      font-size: 12px !important;
-      line-height: 1.42857143 !important;
-      letter-spacing: 4px;
-      border-radius: 0;
-      font-family: Montserrat, sans-serif;
-  }
-  .navbar li a, .navbar .navbar-brand {
-      color: #fff !important;
-  }
-  .navbar-nav li a:hover, .navbar-nav li.active a {
-      color: #f4511e !important;
-      background-color: #fff !important;
-  }
-  .navbar-default .navbar-toggle {
-      border-color: transparent;
-      color: #fff !important;
-  }
-  footer .glyphicon {
-      font-size: 20px;
-      margin-bottom: 20px;
-      color: #f4511e;
-  }
-  .slideanim {visibility:hidden;}
-  .slide {
-      animation-name: slide;
-      -webkit-animation-name: slide;
-      animation-duration: 1s;
-      -webkit-animation-duration: 1s;
-      visibility: visible;
-  }
-  @keyframes slide {
-    0% {
-      opacity: 0;
-      transform: translateY(70%);
-    } 
-    100% {
-      opacity: 1;
-      transform: translateY(0%);
-    }
-  }
-  @-webkit-keyframes slide {
-    0% {
-      opacity: 0;
-      -webkit-transform: translateY(70%);
-    } 
-    100% {
-      opacity: 1;
-      -webkit-transform: translateY(0%);
-    }
-  }
-  @media screen and (max-width: 768px) {
-    .col-sm-4 {
-      text-align: center;
-      margin: 25px 0;
-    }
-    .btn-lg {
-        width: 100%;
-        margin-bottom: 35px;
-    }
-  }
-  @media screen and (max-width: 480px) {
-    .logo {
-        font-size: 150px;
-    }
-  }
-  </style>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
@@ -207,25 +28,24 @@
         <li><a href="#about">SOBRE NOSOTROS</a></li>
         <li><a href="#services">LOCALES</a></li>
         <li><a href="#portfolio">PIZZAS</a></li>
-        <li><a href="#pricing">PEDIDOS</a></li>
+        <li><a href="#pricing">PROMOS</a></li>
         <li><a href="#contact">CONTACTO</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-<div class="jumbotron text-center" style="padding-top: 35px !important;">
+<div class="jumbotron text-center">
   <h1>Pizzería Argenta</h1> 
-  <p>Especialistas en pizzas gourmet</p> 
     <carousel>
         <slide>
-          <img src="assets/fotos/palmitos.jpg" height="465;" width="1300" alt="First slide">
+          <img src="assets/fotos/palmitos.jpg" height="565" width="1350" alt="First slide">
         </slide>
         <slide>
-          <img src="assets/fotos/napolitana.jpg" height="465;" width="1300" alt="Second slide">
+          <img src="assets/fotos/napolitana.jpg" height="565" width="1350" alt="Second slide">
         </slide>
         <slide>
-          <img src="assets/fotos/panceta.jpg" height="465;" width="1300" alt="Third slide">
+          <img src="assets/fotos/panceta.jpg" height="565" width="1350" alt="Third slide">
         </slide>
       </carousel>
 </div>
@@ -237,196 +57,178 @@
       <h2>Nuestra Empresa</h2>
       <h4>Somos Pizzería Argenta, un establecimiento que ofrece productos de pizzería gourmet. Trabajamos desde 1978 en el rubro.
           No dude en venir a conocernos, estamos ubicados en Lomas de Zamora, Banfield y Adrogué.</h4>
-      <h4>Nos esforzamos para elegir la mejor materia prima para nuestras pizzas, y asi convertir nuestra especialidad en tu mayor debilidad.</h4><br>
-      <p>Gracias por elegirnos una vez mas.</p><br>
-      <button class="btn btn-default btn-lg">Calificanos</button>
+      <h4>Nos esforzamos para elegir la mejor materia prima para nuestras pizzas, y asi convertir nuestra especialidad en tu mayor debilidad.</h4>  
+      <h4>Gracias por elegirnos una vez más.</h4><br>
     </div>
     <div class="col-sm-4">
-      <img src="assets/fotos/pizza1.jpg" class="img-circle" alt="pizza" width="204" height="136" style= "margin-top: 30px; margin-left: 30px; margin-bottom: 15px">
-      <img src="assets/fotos/pizza2.jpg" class="img-circle" alt="pizza" width="204" height="136" style= "margin-left: 30px; margin-bottom: 15px">
+      <img src="assets/fotos/pizza2.jpg" class="img-circle" alt="pizza" width="204" height="136" style= "margin-top: 30px; margin-left: 30px; margin-bottom: 15px">
+      <img src="assets/fotos/pizza1.jpg" class="img-circle" alt="pizza" width="204" height="136" style= "margin-left: 30px; margin-bottom: 15px">
       <img src="assets/fotos/pizza3.jpg" class="img-circle" alt="pizza" width="204" height="136" style= "margin-left: 30px">
     </div>
-  </div>
 
+<button class="btn btn-default btn-lg">Calificanos</button><br>
 <rating [(ngModel)]="rate" [max]="max" [readonly]="isReadonly"
         (onHover)="hoveringOver($event)" (onLeave)="resetStar()"
         [titles]="['one','two','three']"></rating>
 <span class="label"
       [ngClass]="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}"
       [ngStyle]="{display: (overStar && !isReadonly) ? 'inline' : 'none'}">{{percent}}%</span>
-
-  
 </div>
 
+</div>
 
 <!-- Container (Services Section) -->
 <div id="services" class="container-fluid text-center">
-  <h2>NUESTROS LOCALES</h2>
-  <h4>Estos son nuestros locales</h4>
-  <br>
-
-<img src="assets/fotos/lomas.jpg" class="img-rounded" alt="Cinque Terre" width="304" height="236" style= "margin-right: 10px">
-<img src="assets/fotos/banfield.jpg" class="img-rounded" alt="Cinque Terre" width="304" height="236" style= "margin-right: 10px">
-<img src="assets/fotos/adrogue.jpg" class="img-rounded" alt="Cinque Terre" width="304" height="236">
-
-  <div class="row">
-    <div class="col-sm-12">
-      <h3>Podés encontrarnos en</h3><br>
-      <h5><strong>Lomas de Zamora:</strong> Loria 567 - Teléfono: 4292-6578 </h5>
-      <h5><strong>Banfield:</strong> Gallo 1254 - Teléfono: 4282-2578 </h5>
-      <h5><strong>Adrogué:</strong> Espora 287 - Teléfono: 4294-4578 </h5>
+  <h2>Nuestros locales</h2><br>
+  <div class="row text-center">
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="assets/fotos/lomas.jpg" class="img-rounded" alt="Paris" width="400" height="300">
+        <p><strong>Lomas de Zamora</strong></p>
+        <p>Loria 567</p>
+      </div>
     </div>
-  </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="assets/fotos/banfield.jpg" class="img-rounded" alt="banfield" width="400" height="300">
+        <p><strong>Banfield</strong></p>
+        <p>Gallo 1254</p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="assets/fotos/adrogue.jpg" class="img-rounded" alt="adrogue" width="400" height="300">
+        <p><strong>Adrogué </strong></p>
+        <p>Espora 287</p>
+      </div>
+    </div>
+  </div><br>
 
 </div>
 
 <!-- Container (Portfolio Section) -->
 <div id="portfolio" class="container-fluid text-center bg-grey">
-  <h2>Nuestras Pizzas</h2><br>
-  <h4>Especialidades de la casa</h4>
-
-<div class="container">        
+  <div class="text-center">
+    <h2>Pizzas</h2>
+    <h4>Nuestras especialidades</h4>
+  </div>
+<div class="container">      
   <table class="table">
-    <thead>
+    <thead style="font-size: 14px;text-align: center;">
       <tr>
-        <th>Pizza</th>
-        <th>Descripción</th>
-        <th>Precio</th>
+        <th>NOMBRE</th>
+        <th>PRECIO</th>
+        <!--<<th>FOTO</th>-->
+        <th>MODIFICAR</th>
+        <th>BORRAR</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngFor="let datos of datosPizzas" style="text-align: left;"> 
       <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>$90</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>$90</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>$90</td>
+      <td><strong>{{ datos.nombre }}</  strong></td>
+      <td>$ {{ datos.precio }} </td>
+      <!--<td> <img src="./assets/fotos/{{ datos.foto }}" width="75px" height="75px"> </td>-->
+      <td> <button class="btn btn-info" (click)="modificarPizza(datos.id)"> MODIFICAR </button> </td>
+      <td> <button class="btn btn-danger"(click)="borrarPizza(datos.id)"> BORRAR </button> </td>
       </tr>
     </tbody>
   </table>
+          <button class="btn btn-success"(click)="altaPizza(datos.id)"> AGREGAR </button>
 </div>
 
-  
-  <h4>Que dicen nuestros clientes</h4>
-  <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item active">
-        <h4>"La mejor pizzeria de Lomas de Zamora!"<br><span>Juan Lopez</span></h4>
-      </div>
-      <div class="item">
-        <h4>"Exquisita!!"<br><span>Julieta Prada</span></h4>
-      </div>
-      <div class="item">
-        <h4>"Para todos los gustos"<br><span>Julian Moreyra</span></h4>
-      </div>
-    </div>
-
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
 </div>
 
 <!-- Container (Pricing Section) -->
 <div id="pricing" class="container-fluid">
   <div class="text-center">
-    <h2>Hace tu pedido</h2>
-    <h4>Deleitate con las mejores pizzas</h4>
+    <h2>Promociones</h2>
+    <h4>Para que elijas la que mas te guste</h4>
   </div>
-  
-<div class="container">        
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Pizza</th>
-        <th>Descripción</th>
-        <th>Precio</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>$90</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>$90</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>$90</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>$90</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>$90</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>$90</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>$90</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
-</div>
+    <div class="col-sm-4 col-xs-12">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <h1>Muzzarella + 6 empanadas</h1>
+        </div>
+        <div class="panel-body">
+          <p><strong>Jueves</strong> efectivo</p>
+        </div>
+        <div class="panel-footer">
+          <h3>$190</h3>
+          <h4>sólo noche</h4>
+          <button class="btn btn-lg">Comprar</button>
+        </div>
+      </div>      
+    </div>     
+    <div class="col-sm-4 col-xs-12">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <h1>Muzzarella + Napolitana</h1>
+        </div>
+        <div class="panel-body">
+          <p><strong>Viernes</strong> efectivo</p>
+        </div>
+        <div class="panel-footer">
+          <h3>$250</h3>
+          <h4>sólo noche</h4>
+          <button class="btn btn-lg">Comprar</button>
+        </div>
+      </div>      
+    </div>       
+    <div class="col-sm-4 col-xs-12">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <h1>Muzarrella + Fugazzeta</h1>
+        </div>
+        <div class="panel-body">
+          <p><strong>Sábado</strong> efectivo</p>
+        </div>
+        <div class="panel-footer">
+          <h3>$290</h3>
+          <h4>sólo noche</h4>
+          <button class="btn btn-lg">Comprar</button>
+        </div>
+      </div>      
+    </div>    
+  </div>
+
 
 <!-- Container (Contact Section) -->
+<!-- Container (Contact Section) -->
 <div id="contact" class="container-fluid bg-grey">
-  <h2 class="text-center">CONTACTO</h2>
+  <h2 class= "text-center">CONTACTO</h2>
   <div class="row">
-    <div class="col-sm-8">  
-      <p ><strong>CONTACTANOS TODOS LOS DÍAS DE 11:00 A 23:00 HORAS.</strong></p><br>
+    <div class="col-sm-4">
       <p><span class="glyphicon glyphicon-map-marker"></span><strong> Lomas de Zamora, Buenos Aires</strong></p>
-      <p><span class="glyphicon glyphicon-phone"></span> +5411 42926578</p>
+      <p><span class="glyphicon glyphicon-phone"></span> +5411 4292-6578</p>
       <p><span class="glyphicon glyphicon-envelope"></span> pizzeriaargentalomas@gmail.com</p><br>
-  </div> 
-  <div class="col-sm-8">  
+    </div>
+    <div class="col-sm-4">
       <p><span class="glyphicon glyphicon-map-marker"></span><strong> Banfield, Buenos Aires</strong></p>
-      <p><span class="glyphicon glyphicon-phone"></span> +5411 42956874</p>
+      <p><span class="glyphicon glyphicon-phone"></span> +5411 4295-6874</p>
       <p><span class="glyphicon glyphicon-envelope"></span> pizzeriaargentabanfield@gmail.com</p><br>
-  </div> 
-  <div class="col-sm-8">  
+    </div>
+    <div class="col-sm-4">  
       <p><span class="glyphicon glyphicon-map-marker"></span><strong> Adrogué, Buenos Aires</strong></p>
-      <p><span class="glyphicon glyphicon-phone"></span> +5411 42956874</p>
+      <p><span class="glyphicon glyphicon-phone"></span> +5411 4295-6874</p>
       <p><span class="glyphicon glyphicon-envelope"></span> pizzeriaargentaadrogue@gmail.com</p>
-  </div> 
+    </div>
+    <div class="col-sm-7">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="name" name="name" placeholder="Nombre" type="text" required>
+        </div>
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+        </div>
+      </div>
+      <textarea class="form-control" id="comments" name="comments" placeholder="Comentarios" rows="5"></textarea><br>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <button class="btn btn-default pull-right" type="submit">Enviar</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
