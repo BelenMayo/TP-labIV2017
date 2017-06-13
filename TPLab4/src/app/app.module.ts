@@ -3,8 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { PizzeriaService } from './servicios/pizzeria.service';
+import { UsuarioService } from './servicios/usuario.service';
+import { PedidoService } from './servicios/pedido.service';
 import { FileUploadModule } from 'ng2-file-upload';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
+
+import {ModalModule} from "ngx-modal";
 
 import { AppComponent } from './app.component';
 import { ListadoComponent } from './listado/listado.component';
@@ -27,9 +31,10 @@ import { PedidosComponent } from './pedidos/pedidos.component';
     FormsModule,
     HttpModule,
     FileUploadModule,
-    Ng2BootstrapModule
+    Ng2BootstrapModule,
+    ModalModule
   ],
-  providers: [PizzeriaService],
+  providers: [PizzeriaService, UsuarioService, PedidoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

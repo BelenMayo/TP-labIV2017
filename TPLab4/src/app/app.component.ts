@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { PizzeriaService } from './servicios/pizzeria.service';
+import { UsuarioService } from './servicios/usuario.service';
+import { PedidoService } from './servicios/pedido.service';
 import { HttpModule, Http } from '@angular/http';
+
+import {ModalModule} from "ngx-modal";
 
 import { FileUploader } from 'ng2-file-upload';
 
@@ -31,7 +35,7 @@ export class AppComponent {
     this.overStar = void 0;
   }
 
-/////////////////////////////////////////////// ABM PIZZA
+/////////////////////////////////////////////////////////////////// ABM PIZZA
 
   title: string= 'Listado de Pizzas';
   public id= "";
@@ -41,13 +45,26 @@ export class AppComponent {
 
   public datosPizzas: Array<any>;
 
-  constructor(public datosPizz: PizzeriaService){
+  constructor(public datosPizz: PizzeriaService, public datosUsu: UsuarioService, public datosPed: PedidoService){
     console.log(this.datosPizzas);
     datosPizz.traerTodasLasPizzas()
     .then(datosPizz => {
       console.info("datos pizza", datosPizz);
       this.datosPizzas= datosPizz;
     })
+
+    this.datosUsu.traerTodosLosUsuarios()
+    .then(datosUsu => {
+      console.info("datos usuario", datosUsu);
+      this.datosUsuarios= datosUsu;
+    })
+
+    this.datosPed.traerTodosLosPedidos()
+    .then(datosPed => {
+      console.info("datos pedido", datosPed);
+      this.datosPedidos= datosPed;
+    })
+
   }
 
   traerUnaPizza($id){
@@ -63,11 +80,72 @@ export class AppComponent {
   }
   
   altaPizza(){
-    let nuevaPersona={nombre:this.id,
+    let nuevaPizza={nombre:this.id,
                       apellido:this.nombre,
                       foto:this.precio,
                       password:this.foto
                     };
-    this.datosPizz.agregarPizza(nuevaPersona);
+    this.datosPizz.agregarPizza(nuevaPizza);
+  }
+
+  /////////////////////////////////////////////////////////////////// ABM USUARIO
+
+  titleUsuario: string= 'Listado de Usuarios';
+  public idUsuario= "";
+  public nombreUsuario= "";
+  public apellido= "";
+  public perfil= "";
+
+  public datosUsuarios: Array<any>;
+
+
+  traerUnUsuario($idUsuario){
+    this.datosUsu.traerUnUsuario($idUsuario)
+      .then(datosUsu => {
+      console.info("datos persona", datosUsu);
+      this.datosUsuarios= datosUsu;
+    })
+  }
+
+  borrarUsuario($idUsuario){
+    this.datosUsu.eliminarUsuario($idUsuario);
+  }
+  
+  altaUsuario(){
+    let nuevoUsuario={nombre:this.id,
+                      apellido:this.nombre,
+                      perfil:this.perfil,
+                    };
+    this.datosUsu.agregarUsuario(nuevoUsuario);
+  }
+
+  /////////////////////////////////////////////////////////////////// ABM PEDIDO
+
+  titlePedido: string= 'Listado de Pedidos';
+  public idPedido= "";
+  public usuario= "";
+  public descripcion= "";
+  public total= "";
+
+  public datosPedidos: Array<any>;
+
+  traerUnPedido($idPedido){
+    this.datosPed.traerUnPedido($idPedido)
+      .then(datosPed => {
+      console.info("datos pedido", datosPed);
+      this.datosPedidos= datosPed;
+    })
+  }
+
+  borrarPedido($idPedido){
+    this.datosPed.eliminarPedido($idPedido);
+  }
+  
+  altaPedido(){
+    let nuevoPedido={ usuario:this.usuario,
+                      descripcion:this.descripcion,
+                      total:this.total,
+                    };
+    this.datosPed.agregarPedido(nuevoPedido);
   }
 }

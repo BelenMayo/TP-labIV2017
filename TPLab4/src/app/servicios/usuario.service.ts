@@ -3,15 +3,15 @@ import { Http, Response, RequestOptions, URLSearchParams, Headers} from '@angula
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class PizzeriaService {
+export class UsuarioService {
 
   constructor(public http:Http) { }
+  
+////////////////////////////////////////////////////////////////////////////// USUARIO
 
-  ////////////////////////////////////////////////////////////////////////////// PIZZA
-
-  traerTodasLasPizzas(){
+  traerTodosLosUsuarios(){
     //URL de API REST(funciones.js)
-    let url= 'http://localhost:8080/ApiLab4SP/public/index.php/pizzas'; 
+    let url= 'http://localhost:8080/ApiLab4SP/public/index.php/usuarios'; 
     
       return this.http
         .get(url)
@@ -20,8 +20,8 @@ export class PizzeriaService {
         .catch(this.error);
   }
 
-  traerUnaPizza(idPizza){
-    let url= 'http://localhost:8080/ApiLab4SP/public/index.php/pizzas' + idPizza; 
+  traerUnUsuario(idUsuario){
+    let url= 'http://localhost:8080/ApiLab4SP/public/index.php/usuario' + idUsuario; 
     
       return this.http
         .get(url)
@@ -30,27 +30,27 @@ export class PizzeriaService {
         .catch(this.error);
   }
 
-  agregarPizza(pizza) {
-    let datos={ nombre:pizza.nombre,
-                precio :pizza.precio,
-                foto:pizza.foto,
+  agregarUsuario(usuario) {
+    let datos={ nombre:usuario.nombre,
+                apellido :usuario.apellido,
+                perfil:usuario.perfil,
               };
     
-    this.http.post("http://localhost:8080/ApiLab4SP/public/index.php/pizza/alta", datos)
+    this.http.post("http://localhost:8080/ApiLab4SP/public/index.php/usuario/alta", datos)
              .toPromise()
              .then()
              .catch(this.error)
   }
 
-  eliminarPizza(idPizza) {
-    let datos = {"id": idPizza};
+  eliminarUsuario(idUsuario) {
+    let datos = {"id": idUsuario};
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({
     headers: headers,
     body : datos
   });
     
-    this.http.delete("http://localhost:8080/ApiLab4SP/public/index.php/pizza/borrar/" + idPizza)
+    this.http.delete("http://localhost:8080/ApiLab4SP/public/index.php/usuario/borrar/" + idUsuario)
              .toPromise()
              .then()
              .catch(this.error)

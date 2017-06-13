@@ -26,10 +26,12 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#about">SOBRE NOSOTROS</a></li>
-        <li><a href="#services">LOCALES</a></li>
-        <li><a href="#portfolio">PIZZAS</a></li>
-        <li><a href="#pricing">PROMOS</a></li>
-        <li><a href="#contact">CONTACTO</a></li>
+        <li><a href="#locales">LOCALES</a></li>
+        <li><a href="#pizzas">PIZZAS</a></li>
+        <li><a href="#promos">PROMOS</a></li>
+        <li><a href="#pedidos">PEDIDOS</a></li>
+        <li><a href="#contacto">CONTACTO</a></li>
+        <li><a href="#usuarios">USUARIOS</a></li>
       </ul>
     </div>
   </div>
@@ -77,8 +79,8 @@
 
 </div>
 
-<!-- Container (Services Section) -->
-<div id="services" class="container-fluid text-center">
+<!-- Container (Locales Sección) -->
+<div id="locales" class="container-fluid text-center">
   <h2>Nuestros locales</h2><br>
   <div class="row text-center">
     <div class="col-sm-4">
@@ -106,8 +108,8 @@
 
 </div>
 
-<!-- Container (Portfolio Section) -->
-<div id="portfolio" class="container-fluid text-center bg-grey">
+<!-- Container (Pizzas Sección) -->
+<div id="pizzas" class="container-fluid text-center bg-grey">
   <div class="text-center">
     <h2>Pizzas</h2>
     <h4>Nuestras especialidades</h4>
@@ -134,12 +136,11 @@
     </tbody>
   </table>
           <button class="btn btn-success"(click)="altaPizza(datos.id)"> AGREGAR </button>
+  </div>
 </div>
 
-</div>
-
-<!-- Container (Pricing Section) -->
-<div id="pricing" class="container-fluid">
+<!-- Container (Promos Sección) -->
+<div id="promos" class="container-fluid">
   <div class="text-center">
     <h2>Promociones</h2>
     <h4>Para que elijas la que mas te guste</h4>
@@ -193,9 +194,53 @@
   </div>
 
 
-<!-- Container (Contact Section) -->
-<!-- Container (Contact Section) -->
-<div id="contact" class="container-fluid bg-grey">
+  <!-- Container (Pedidos Sección) -->
+<div id="pedidos" class="container-fluid text-center bg-grey">
+  <div class="text-center">
+    <h2>Pedidos</h2>
+  </div>
+<div class="container">      
+  <table class="table">
+    <thead style="font-size: 14px;text-align: center;">
+      <tr>
+        <th>USUARIO</th>
+        <th>DESCRIPCION</th>
+        <th>TOTAL</th>
+        <th>MODIFICAR</th>
+        <th>BORRAR</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let datos of datosPedidos" style="text-align: left;"> 
+      <tr>
+      <td>{{ datos.usuario }}</td>
+      <td><strong> {{ datos.descripcion }}</strong> </td>
+      <td>$ {{ datos.total }}</td>
+      <td> <button class="btn btn-info" (click)="modificarPizza(datos.id)"> MODIFICAR </button> </td>
+      <td> <button class="btn btn-danger"(click)="borrarPizza(datos.id)"> BORRAR </button> </td>
+      </tr>
+    </tbody>
+  </table>
+
+    <div class="row">
+      <button class="btn btn-success"(click)="myModal.open()"> NUEVO PEDIDO </button>
+      <modal #myModal>
+          <modal-header>
+              <h1>Modificar Pizza</h1>
+          </modal-header>
+          <modal-content>
+              Muzzarella
+          </modal-content>
+          <modal-footer>
+              <button class="btn btn-danger"(click)="myModal.close()"> CERRAR </button>
+          </modal-footer>
+      </modal>
+    </div>
+  </div>
+</div>
+
+
+<!-- Container (Contacto Sección) -->
+<div id="contacto" class="container-fluid bg-grey">
   <h2 class= "text-center">CONTACTO</h2>
   <div class="row">
     <div class="col-sm-4">
@@ -229,6 +274,36 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Container (Usuarios Sección) -->
+<div id="usuarios" class="container-fluid text-center bg-grey">
+  <div class="text-center">
+    <h2>Usuarios</h2>
+  </div>
+<div class="container">      
+  <table class="table">
+    <thead style="font-size: 14px;text-align: center;">
+      <tr>
+        <th>NOMBRE</th>
+        <th>APELLIDO</th>
+        <th>CARGO</th>
+        <th>MODIFICAR</th>
+        <th>BORRAR</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let datos of datosUsuarios" style="text-align: left;"> 
+      <tr>
+      <td>{{ datos.nombre }}</td>
+      <td><strong> {{ datos.apellido }}</strong> </td>
+      <td>{{ datos.perfil }}</td>
+      <td><button class="btn btn-info" (click)="modificarUsuario(datos.id)"> MODIFICAR </button></td>
+      <td><button class="btn btn-danger"(click)="borrarUsuario(datos.id)"> BORRAR </button></td>
+      </tr>
+    </tbody>
+  </table>
+          <button class="btn btn-success"(click)="altaPizza(datos.id)"> AGREGAR </button>
   </div>
 </div>
 
