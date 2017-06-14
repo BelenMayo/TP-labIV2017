@@ -25,13 +25,14 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#about">SOBRE NOSOTROS</a></li>
+        <li><a href="#about">EMPRESA</a></li>
         <li><a href="#locales">LOCALES</a></li>
         <li><a href="#pizzas">PIZZAS</a></li>
         <li><a href="#promos">PROMOS</a></li>
         <li><a href="#pedidos">PEDIDOS</a></li>
         <li><a href="#contacto">CONTACTO</a></li>
         <li><a href="#usuarios">USUARIOS</a></li>
+        <li><a href="#login">LOGIN</a></li>
       </ul>
     </div>
   </div>
@@ -118,11 +119,10 @@
   <table class="table">
     <thead style="font-size: 14px;text-align: center;">
       <tr>
-        <th>NOMBRE</th>
-        <th>PRECIO</th>
+        <th class="col-sm-5">NOMBRE</th>
+        <th class="col-sm-5">PRECIO</th>
         <!--<<th>FOTO</th>-->
-        <th>MODIFICAR</th>
-        <th>BORRAR</th>
+        <th colspan="2" style="padding-left: 80px" class="col-sm-2">ACCIONES</th>
       </tr>
     </thead>
     <tbody *ngFor="let datos of datosPizzas" style="text-align: left;"> 
@@ -203,11 +203,10 @@
   <table class="table">
     <thead style="font-size: 14px;text-align: center;">
       <tr>
-        <th>USUARIO</th>
-        <th>DESCRIPCION</th>
-        <th>TOTAL</th>
-        <th>MODIFICAR</th>
-        <th>BORRAR</th>
+        <th class="col-sm-3">USUARIO</th>
+        <th class="col-sm-3">DESCRIPCION</th>
+        <th class="col-sm-3">TOTAL</th>
+        <th colspan="2" style="padding-left: 90px" class="col-sm-2">ACCIONES</th>
       </tr>
     </thead>
     <tbody *ngFor="let datos of datosPedidos" style="text-align: left;"> 
@@ -215,15 +214,14 @@
       <td>{{ datos.usuario }}</td>
       <td><strong> {{ datos.descripcion }}</strong> </td>
       <td>$ {{ datos.total }}</td>
-      <td> <button class="btn btn-info" (click)="modificarPizza(datos.id)"> MODIFICAR </button> </td>
-      <td> <button class="btn btn-danger"(click)="borrarPizza(datos.id)"> BORRAR </button> </td>
+      <td> <button class="btn btn-info" (click)="modalModificarPedido.open()"> MODIFICAR </button> </td>
+      <td> <button class="btn btn-danger"(click)="modalBorrarPedido.open()"> BORRAR </button> </td>
       </tr>
     </tbody>
   </table>
 
-    <div class="row">
-      <button class="btn btn-success"(click)="myModal.open()"> NUEVO PEDIDO </button>
-      <modal #myModal>
+  <div class="row">
+      <modal #modalModificarPedido  valign= "center">
           <modal-header>
               <h1>Modificar Pizza</h1>
           </modal-header>
@@ -231,12 +229,43 @@
               Muzzarella
           </modal-content>
           <modal-footer>
-              <button class="btn btn-danger"(click)="myModal.close()"> CERRAR </button>
+              <button class="btn btn-danger"(click)="modalModificarPedido.close()"> CERRAR </button>
+          </modal-footer>
+      </modal>
+  </div>
+
+    <div class="row">
+      <modal #modalBorrarPedido valign= "center">
+          <modal-header>
+              <h1>Borrar Pizza</h1>
+          </modal-header>
+          <modal-content>
+              Muzzarella
+          </modal-content>
+          <modal-footer>
+              <button class="btn btn-danger"(click)="modalBorrarPedido.close()"> CERRAR </button>
+          </modal-footer>
+      </modal>
+    </div>
+
+  <div class="row">
+      <button class="btn btn-success"(click)="modalAgregarPedido.open()"> NUEVO PEDIDO </button>
+      <modal #modalAgregarPedido>
+          <modal-header>
+              <h1>Modificar Pizza</h1>
+          </modal-header>
+          <modal-content>
+              Muzzarella
+          </modal-content>
+          <modal-footer>
+              <button class="btn btn-danger"(click)="modalAgregarPedido.close()"> CERRAR </button>
           </modal-footer>
       </modal>
     </div>
   </div>
 </div>
+
+
 
 
 <!-- Container (Contacto Sección) -->
@@ -286,11 +315,10 @@
   <table class="table">
     <thead style="font-size: 14px;text-align: center;">
       <tr>
-        <th>NOMBRE</th>
-        <th>APELLIDO</th>
-        <th>CARGO</th>
-        <th>MODIFICAR</th>
-        <th>BORRAR</th>
+        <th class="col-sm-3">NOMBRE</th>
+        <th class="col-sm-3">APELLIDO</th>
+        <th class="col-sm-4">CARGO</th>
+        <th colspan="2" style="padding-left: 75px" class="col-sm-2">ACCIONES</th>
       </tr>
     </thead>
     <tbody *ngFor="let datos of datosUsuarios" style="text-align: left;"> 
@@ -305,6 +333,41 @@
   </table>
           <button class="btn btn-success"(click)="altaPizza(datos.id)"> AGREGAR </button>
   </div>
+</div>
+
+<!-- Container (Login Sección) -->
+<div id="login" class="container-fluid text-center bg-grey">
+  <div class="text-center">
+    <h2>Login</h2>
+  </div>
+    <div class="container">      
+      <button class="btn btn-success"(click)="modalLogin.open()"> LOGUEARSE </button><br><br>
+    </div>
+
+<div class="row">
+      <modal #modalLogin>
+          <modal-header>
+              <h1>LOGIN</h1>
+          </modal-header>
+          <modal-content>
+              <b><div align=left>Nombres</div></b>     
+              <input class="form-control" id="nombre" name="nombre" placeholder="nombres..." type="nombre">
+              <b><div align=left style="padding-top:10px">Apellido</div></b> 
+              <input class="form-control" id="apellido" name="apellido" placeholder="apellido..." type="apellido">
+              <b><div align=left style="padding-top:10px">Mail</div></b>   
+              <input class="form-control" id="mail" name="mail" placeholder="Mail" type="mail...">
+              <b><div align=left style="padding-top:10px">Contraseña</div></b>   
+              <input class="form-control" id="password" name="password" placeholder="contraseña..." type="password">
+              <b><div align=left style="padding-top:10px">Repetir contraseña</div></b>   
+              <input class="form-control" id="repetir" name="repetir" placeholder="repetir contraseña..." type="repetir">
+          </modal-content>
+          <modal-footer>
+              <button class="btn btn-success"(click)="modalLogin.close()"> GUARDAR </button>
+              <button class="btn btn-danger"(click)="modalLogin.close()"> CANCELAR </button>
+          </modal-footer>
+      </modal>
+  </div>
+
 </div>
 
 <!-- Add Google Maps -->
