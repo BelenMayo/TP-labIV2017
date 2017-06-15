@@ -42,13 +42,13 @@
   <h1>Pizzería Argenta</h1> 
     <carousel>
         <slide>
-          <img src="assets/fotos/palmitos.jpg" height="565" width="1350" alt="First slide">
+          <img src="assets/fotos/napolitana.jpg" height="565" width="1350" alt="First slide">
         </slide>
         <slide>
-          <img src="assets/fotos/napolitana.jpg" height="565" width="1350" alt="Second slide">
+          <img src="assets/fotos/panceta.jpg" height="565" width="1350" alt="Second slide">
         </slide>
         <slide>
-          <img src="assets/fotos/panceta.jpg" height="565" width="1350" alt="Third slide">
+          <img src="assets/fotos/fugazzeta.jpg" height="565" width="1350" alt="Third slide">
         </slide>
       </carousel>
 </div>
@@ -130,12 +130,66 @@
       <td><strong>{{ datos.nombre }}</  strong></td>
       <td>$ {{ datos.precio }} </td>
       <!--<td> <img src="./assets/fotos/{{ datos.foto }}" width="75px" height="75px"> </td>-->
-      <td> <button class="btn btn-info" (click)="modificarPizza(datos.id)"> MODIFICAR </button> </td>
-      <td> <button class="btn btn-danger"(click)="borrarPizza(datos.id)"> BORRAR </button> </td>
+      <td> <button class="btn btn-info" (click)="modalModificarPizza.open()"> MODIFICAR </button> </td>
+      <td> <button class="btn btn-danger"(click)="modalBorrarPizza.open()"> BORRAR </button> </td>
       </tr>
     </tbody>
   </table>
-          <button class="btn btn-success"(click)="altaPizza(datos.id)"> AGREGAR </button>
+
+  
+  <div class="row">
+      <modal #modalModificarPizza  valign= "center">
+          <modal-header>
+              <h1>Modificar Pizza</h1>
+          </modal-header>
+          <modal-content>
+              <b><div align=left style="padding-top:10px">Pizza</div></b> 
+              <input class="form-control" id="pizza" name="pizza" type="pizza">
+              <b><div align=left style="padding-top:10px">Precio</div></b>   
+              <input class="form-control" id="precio" name="precio" type="precio">
+          </modal-content>
+          <modal-footer>
+              <button class="btn btn-success"(click)="modalModificarPizza.close()"> GUARDAR </button>
+              <button class="btn btn-danger"(click)="modalModificarPizza.close()"> CANCELAR </button>
+          </modal-footer>
+      </modal>
+  </div>
+
+    <div class="row">
+      <modal #modalBorrarPizza valign= "center">
+          <modal-header>
+              <h1>Eliminar Pizza</h1>
+          </modal-header>
+          <modal-content>
+              <b><div align=left>Id</div></b>     
+              <input class="form-control" id="id" name="id" type="id">
+          </modal-content>
+          <modal-footer>
+              <button class="btn btn-success"(click)="modalBorrarPizza.close()"> ELIMINAR </button>
+              <button class="btn btn-danger"(click)="modalBorrarPizza.close()"> CANCELAR </button>
+          </modal-footer>
+      </modal>
+    </div>
+
+  <div class="row">
+      <button class="btn btn-success"(click)="modalAgregarPizza.open()"> NUEVO PEDIDO </button>
+      <modal #modalAgregarPizza>
+          <modal-header>
+              <h1>Agregar Pizza</h1>
+          </modal-header>
+          <modal-content>
+              <b><div align=left style="padding-top:10px">Descripcion</div></b> 
+              <input class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" type="descripcion">
+              <b><div align=left style="padding-top:10px">Total</div></b>   
+              <input class="form-control" id="total" name="total" placeholder="Total" type="total">
+          </modal-content>
+          <modal-footer>
+              <button class="btn btn-success"(click)="modalAgregarPizza.close()"> GUARDAR </button>
+              <button class="btn btn-danger"(click)="modalAgregarPizza.close()"> CANCELAR </button>
+          </modal-footer>
+      </modal>
+    </div>
+
   </div>
 </div>
 
@@ -223,13 +277,17 @@
   <div class="row">
       <modal #modalModificarPedido  valign= "center">
           <modal-header>
-              <h1>Modificar Pizza</h1>
+              <h1>Modificar Pedido</h1>
           </modal-header>
           <modal-content>
-              Muzzarella
+              <b><div align=left style="padding-top:10px">Descripcion</div></b> 
+              <input class="form-control" id="descripcion" name="descripcion"type="descripcion">
+              <b><div align=left style="padding-top:10px">Total</div></b>   
+              <input class="form-control" id="total" name="total" type="total...">
           </modal-content>
           <modal-footer>
-              <button class="btn btn-danger"(click)="modalModificarPedido.close()"> CERRAR </button>
+              <button class="btn btn-success"(click)="modalModificarPedido.close()"> GUARDAR </button>
+              <button class="btn btn-danger"(click)="modalModificarPedido.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
   </div>
@@ -237,13 +295,15 @@
     <div class="row">
       <modal #modalBorrarPedido valign= "center">
           <modal-header>
-              <h1>Borrar Pizza</h1>
+              <h1>Eliminar Pedido</h1>
           </modal-header>
           <modal-content>
-              Muzzarella
+              <b><div align=left>Id</div></b>     
+              <input class="form-control" id="id" name="id" type="id">
           </modal-content>
           <modal-footer>
-              <button class="btn btn-danger"(click)="modalBorrarPedido.close()"> CERRAR </button>
+              <button class="btn btn-success"(click)="modalBorrarPedido.close()"> ELIMINAR </button>
+              <button class="btn btn-danger"(click)="modalBorrarPedido.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
     </div>
@@ -252,20 +312,22 @@
       <button class="btn btn-success"(click)="modalAgregarPedido.open()"> NUEVO PEDIDO </button>
       <modal #modalAgregarPedido>
           <modal-header>
-              <h1>Modificar Pizza</h1>
+              <h1>Agregar Pedido</h1>
           </modal-header>
-          <modal-content>
-              Muzzarella
+          <modal-content>  
+              <b><div align=left style="padding-top:10px">Descripcion</div></b> 
+              <input class="form-control" id="descripcion" name="descripcion" placeholder="descripcion..." type="descripcion">
+              <b><div align=left style="padding-top:10px">Total</div></b>   
+              <input class="form-control" id="total" name="total" placeholder="Mail" type="total">
           </modal-content>
           <modal-footer>
-              <button class="btn btn-danger"(click)="modalAgregarPedido.close()"> CERRAR </button>
+              <button class="btn btn-success"(click)="modalAgregarPedido.close()"> GUARDAR </button>
+              <button class="btn btn-danger"(click)="modalAgregarPedido.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
     </div>
   </div>
 </div>
-
-
 
 
 <!-- Container (Contacto Sección) -->
@@ -326,12 +388,69 @@
       <td>{{ datos.nombre }}</td>
       <td><strong> {{ datos.apellido }}</strong> </td>
       <td>{{ datos.perfil }}</td>
-      <td><button class="btn btn-info" (click)="modificarUsuario(datos.id)"> MODIFICAR </button></td>
-      <td><button class="btn btn-danger"(click)="borrarUsuario(datos.id)"> BORRAR </button></td>
+      <td><button class="btn btn-info" (click)="modalModificarUsuario.open()"> MODIFICAR </button></td>
+      <td><button class="btn btn-danger"(click)="modalBorrarUsuario.open()"> BORRAR </button></td>
       </tr>
     </tbody>
   </table>
-          <button class="btn btn-success"(click)="altaPizza(datos.id)"> AGREGAR </button>
+
+  <div class="row">
+      <modal #modalModificarUsuario  valign= "center">
+          <modal-header>
+              <h1>Modificar Usuario</h1>
+          </modal-header>
+          <modal-content>
+              <b><div align=left style="padding-top:10px">Nombre</div></b> 
+              <input class="form-control" id="nombre" name="nombre" type="nombre">
+              <b><div align=left style="padding-top:10px">Apellido</div></b>   
+              <input class="form-control" id="apellido" name="apellido" type="apellido">
+              <b><div align=left style="padding-top:10px">Cargo</div></b>   
+              <input class="form-control" id="cargo" name="cargo" type="cargo">
+          </modal-content>
+          <modal-footer>
+              <button class="btn btn-success"(click)="modalModificarUsuario.close()"> GUARDAR </button>
+              <button class="btn btn-danger"(click)="modalModificarUsuario.close()"> CANCELAR </button>
+          </modal-footer>
+      </modal>
+  </div>
+
+    <div class="row">
+      <modal #modalBorrarUsuario valign= "center">
+          <modal-header>
+              <h1>Eliminar Usuario</h1>
+          </modal-header>
+          <modal-content>
+              <b><div align=left>Id</div></b>     
+              <input class="form-control" id="id" name="id" type="id">
+          </modal-content>
+          <modal-footer>
+              <button class="btn btn-success"(click)="modalBorrarUsuario.close()"> ELIMINAR </button>
+              <button class="btn btn-danger"(click)="modalBorrarUsuario.close()"> CANCELAR </button>
+          </modal-footer>
+      </modal>
+    </div>
+
+  <div class="row">
+      <button class="btn btn-success"(click)="modalCrearUsuario.open()"> NUEVO USUARIO </button>
+      <modal #modalCrearUsuario>
+          <modal-header>
+              <h1>Agregar Usuario</h1>
+          </modal-header>
+          <modal-content>
+              <b><div align=left style="padding-top:10px">Nombre</div></b> 
+              <input class="form-control" id="nombre" name="nombre" placeholder="Nombre" type="nombre">
+              <b><div align=left style="padding-top:10px">Apellido</div></b>   
+              <input class="form-control" id="apellido" name="apellido" placeholder="Mail" type="apellido">
+              <b><div align=left style="padding-top:10px">Cargo</div></b>   
+              <input class="form-control" id="cargo" name="cargo" placeholder="Cargo" type="cargo">
+          </modal-content>
+          <modal-footer>
+              <button class="btn btn-success"(click)="modalCrearUsuario.close()"> GUARDAR </button>
+              <button class="btn btn-danger"(click)="modalCrearUsuario.close()"> CANCELAR </button>
+          </modal-footer>
+      </modal>
+    </div>
+
   </div>
 </div>
 
