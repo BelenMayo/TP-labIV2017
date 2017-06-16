@@ -377,17 +377,23 @@
   <table class="table">
     <thead style="font-size: 14px;text-align: center;">
       <tr>
-        <th class="col-sm-3">NOMBRE</th>
-        <th class="col-sm-3">APELLIDO</th>
-        <th class="col-sm-4">CARGO</th>
+        <th class="col-sm-2">NOMBRE</th>
+        <th class="col-sm-2">CARGO</th>
+        <th class="col-sm-2">CALLE</th>
+        <th class="col-sm-2">NUMERO</th>
+        <th class="col-sm-2">LOCALIDAD</th>
+        <th class="col-sm-2">TELEFONO</th>
         <th colspan="2" style="padding-left: 75px" class="col-sm-2">ACCIONES</th>
       </tr>
     </thead>
     <tbody *ngFor="let datos of datosUsuarios" style="text-align: left;"> 
       <tr>
-      <td>{{ datos.nombre }}</td>
-      <td><strong> {{ datos.apellido }}</strong> </td>
+      <td><strong>{{ datos.nombre }} {{ datos.apellido }}</strong></td>
       <td>{{ datos.perfil }}</td>
+      <td>{{ datos.calle }}</td>
+      <td>{{ datos.numero }}</td>
+      <td>{{ datos.localidad }}</td>
+      <td>{{ datos.telefono }}</td>
       <td><button class="btn btn-info" (click)="modalModificarUsuario.open()"> MODIFICAR </button></td>
       <td><button class="btn btn-danger"(click)="modalBorrarUsuario.open()"> BORRAR </button></td>
       </tr>
@@ -401,11 +407,19 @@
           </modal-header>
           <modal-content>
               <b><div align=left style="padding-top:10px">Nombre</div></b> 
-              <input class="form-control" id="nombre" name="nombre" type="nombre">
+              <input class="form-control" id="nombre" name="nombre" placeholder="Nombre" type="nombre">
               <b><div align=left style="padding-top:10px">Apellido</div></b>   
-              <input class="form-control" id="apellido" name="apellido" type="apellido">
+              <input class="form-control" id="apellido" name="apellido" placeholder="Mail" type="apellido">
               <b><div align=left style="padding-top:10px">Cargo</div></b>   
-              <input class="form-control" id="cargo" name="cargo" type="cargo">
+              <input class="form-control" id="cargo" name="cargo" placeholder="Cargo" type="cargo">
+               <b><div align=left style="padding-top:10px">Calle</div></b>   
+              <input class="form-control" id="calle" name="calle" placeholder="Calle" type="calle">
+              <b><div align=left style="padding-top:10px">Número</div></b>   
+              <input class="form-control" id="numero" name="numero" placeholder="Numero" type="numero">
+              <b><div align=left style="padding-top:10px">Localidad</div></b>   
+              <input class="form-control" id="localidad" name="localidad" placeholder="Localidad" type="localidad">
+              <b><div align=left style="padding-top:10px">Teléfono</div></b>   
+              <input class="form-control" id="telefono" name="telefono" placeholder="Telefono" type="telefono">
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="modalModificarUsuario.close()"> GUARDAR </button>
@@ -443,6 +457,14 @@
               <input class="form-control" id="apellido" name="apellido" placeholder="Mail" type="apellido">
               <b><div align=left style="padding-top:10px">Cargo</div></b>   
               <input class="form-control" id="cargo" name="cargo" placeholder="Cargo" type="cargo">
+               <b><div align=left style="padding-top:10px">Calle</div></b>   
+              <input class="form-control" id="calle" name="calle" placeholder="Calle" type="calle">
+              <b><div align=left style="padding-top:10px">Número</div></b>   
+              <input class="form-control" id="numero" name="numero" placeholder="Numero" type="numero">
+              <b><div align=left style="padding-top:10px">Localidad</div></b>   
+              <input class="form-control" id="localidad" name="localidad" placeholder="Localidad" type="localidad">
+              <b><div align=left style="padding-top:10px">Teléfono</div></b>   
+              <input class="form-control" id="telefono" name="telefono" placeholder="Telefono" type="telefono">
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="modalCrearUsuario.close()"> GUARDAR </button>
@@ -469,16 +491,14 @@
               <h1>LOGIN</h1>
           </modal-header>
           <modal-content>
-              <b><div align=left>Nombres</div></b>     
-              <input class="form-control" id="nombre" name="nombre" placeholder="nombres..." type="nombre">
-              <b><div align=left style="padding-top:10px">Apellido</div></b> 
-              <input class="form-control" id="apellido" name="apellido" placeholder="apellido..." type="apellido">
+            <img src="/assets/fotos/login.png" alt="Avatar" style="width:25%" class="w3-circle w3-margin-top">
               <b><div align=left style="padding-top:10px">Mail</div></b>   
               <input class="form-control" id="mail" name="mail" placeholder="Mail" type="mail...">
               <b><div align=left style="padding-top:10px">Contraseña</div></b>   
-              <input class="form-control" id="password" name="password" placeholder="contraseña..." type="password">
-              <b><div align=left style="padding-top:10px">Repetir contraseña</div></b>   
-              <input class="form-control" id="repetir" name="repetir" placeholder="repetir contraseña..." type="repetir">
+              <input class="form-control" id="clave" name="clave" placeholder="Contraseña" type="clave"><br>
+              <button class="btn btn-info btn-block"(click)="modalLogin.close()"> ADMINISTRADOR </button>
+              <button class="btn btn-warning btn-block"(click)="modalLogin.close()"> ENCARGADO </button>
+              <button class="btn btn-primary btn-block"(click)="modalLogin.close()"> CLIENTE </button>
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="modalLogin.close()"> GUARDAR </button>

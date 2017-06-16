@@ -1,0 +1,23 @@
+<div class="row">
+      <modal #modalLogin>
+          <modal-header>
+              <h1>LOGIN</h1>
+          </modal-header>
+          <modal-content>
+              <b><div align=left style="padding-top:10px">Mail</div></b>   
+              <input class="form-control" id="mail" name="mail" placeholder="Mail" type="mail...">
+              <b><div align=left style="padding-top:10px">Contraseña</div></b>   
+              <input class="form-control" id="password" name="password" placeholder="contraseña..." type="password">
+              <b><div align=left style="padding-top:10px">Repetir contraseña</div></b>   
+              <input class="form-control" id="repetir" name="repetir" placeholder="repetir contraseña..." type="repetir">
+              <button class="btn btn-info"(click)="modalLogin.close()"> ADMINISTRADOR </button>
+              <button class="btn btn-warning"(click)="modalLogin.close()"> ENCARGADO </button>
+              <button class="btn btn-primary"(click)="modalLogin.close()"> CLIENTE </button>
+          </modal-content>
+          <modal-footer>
+              <button class="btn btn-success"(click)="modalLogin.close()"> GUARDAR </button>
+              <button class="btn btn-danger"(click)="modalLogin.close()"> CANCELAR </button>
+          </modal-footer>
+      </modal>
+  </div>
+
