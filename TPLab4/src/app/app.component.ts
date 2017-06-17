@@ -4,8 +4,11 @@ import { UsuarioService } from './servicios/usuario.service';
 import { PedidoService } from './servicios/pedido.service';
 import { HttpModule, Http } from '@angular/http';
 
-import {ModalModule} from "ngx-modal";
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireModule } from 'angularfire2';
 
+import * as $ from 'jquery';
+import {ModalModule} from "ngx-modal";
 import { FileUploader } from 'ng2-file-upload';
 
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
@@ -45,8 +48,16 @@ export class AppComponent {
 
   public datosPizzas: Array<any>;
 
-  constructor(public datosPizz: PizzeriaService, public datosUsu: UsuarioService, public datosPed: PedidoService){
-    console.log(this.datosPizzas);
+  items: FirebaseListObservable<any[]>;
+  public user= "";
+  public pass= "";
+
+  constructor(public datosPizz: PizzeriaService, public datosUsu: UsuarioService, public datosPed: PedidoService,
+                public db: AngularFireDatabase ,public angfire: AngularFireModule){
+
+    this.items = db.list('/items'); 
+    console.log("datos usuarios", this.items);
+
     datosPizz.traerTodasLasPizzas()
     .then(datosPizz => {
       console.info("datos pizza", datosPizz);
@@ -64,7 +75,6 @@ export class AppComponent {
       console.info("datos pedido", datosPed);
       this.datosPedidos= datosPed;
     })
-
   }
 
   traerUnaPizza($id){
@@ -147,5 +157,17 @@ export class AppComponent {
                       total:this.total,
                     };
     this.datosPed.agregarPedido(nuevoPedido);
+  }
+
+  login(){
+    this.user= $("#usuario").val();
+    this.pass= $("#clave").val();
+
+        this.items.push({
+          //usuario: this.user,
+          //clave: this.pass
+          usuario: "Belen",
+          clave: "1234"
+      });
   }
 }

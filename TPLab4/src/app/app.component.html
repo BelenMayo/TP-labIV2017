@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="jquery.js"></script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
@@ -40,6 +41,7 @@
 
 <div class="jumbotron text-center">
   <h1>Pizzería Argenta</h1> 
+
     <carousel>
         <slide>
           <img src="assets/fotos/napolitana.jpg" height="565" width="1350" alt="First slide">
@@ -62,6 +64,12 @@
           No dude en venir a conocernos, estamos ubicados en Lomas de Zamora, Banfield y Adrogué.</h4>
       <h4>Nos esforzamos para elegir la mejor materia prima para nuestras pizzas, y asi convertir nuestra especialidad en tu mayor debilidad.</h4>  
       <h4>Gracias por elegirnos una vez más.</h4><br>
+    <ul>
+    <li *ngFor="let item of items | async">
+      {{ item.usuario }}
+    </li>
+  </ul>
+
     </div>
     <div class="col-sm-4">
       <img src="assets/fotos/pizza2.jpg" class="img-circle" alt="pizza" width="204" height="136" style= "margin-top: 30px; margin-left: 30px; margin-bottom: 15px">
@@ -492,16 +500,16 @@
           </modal-header>
           <modal-content>
             <img src="/assets/fotos/login.png" alt="Avatar" style="width:25%" class="w3-circle w3-margin-top">
-              <b><div align=left style="padding-top:10px">Mail</div></b>   
+              <b><div id="usuario" align=left style="padding-top:10px">Mail</div></b>   
               <input class="form-control" id="mail" name="mail" placeholder="Mail" type="mail...">
-              <b><div align=left style="padding-top:10px">Contraseña</div></b>   
+              <b><div id="clave" align=left style="padding-top:10px">Contraseña</div></b>   
               <input class="form-control" id="clave" name="clave" placeholder="Contraseña" type="clave"><br>
               <button class="btn btn-info btn-block"(click)="modalLogin.close()"> ADMINISTRADOR </button>
               <button class="btn btn-warning btn-block"(click)="modalLogin.close()"> ENCARGADO </button>
               <button class="btn btn-primary btn-block"(click)="modalLogin.close()"> CLIENTE </button>
           </modal-content>
           <modal-footer>
-              <button class="btn btn-success"(click)="modalLogin.close()"> GUARDAR </button>
+              <button class="btn btn-success"(click)="login()"> GUARDAR </button>
               <button class="btn btn-danger"(click)="modalLogin.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
