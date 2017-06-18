@@ -51,6 +51,8 @@ export class AppComponent {
   items: FirebaseListObservable<any[]>;
   public user= "";
   public pass= "";
+  public userLogin= "";
+  public passLogin= "";
 
   constructor(public datosPizz: PizzeriaService, public datosUsu: UsuarioService, public datosPed: PedidoService,
                 public db: AngularFireDatabase ,public angfire: AngularFireModule){
@@ -159,15 +161,16 @@ export class AppComponent {
     this.datosPed.agregarPedido(nuevoPedido);
   }
 
-  login(){
-    this.user= $("#usuario").val();
-    this.pass= $("#clave").val();
-
-        this.items.push({
-          //usuario: this.user,
-          //clave: this.pass
-          usuario: "Belen",
-          clave: "1234"
+  registrarse(){
+    if(this.user != "" && this.pass != ""){  
+     this.items.push({
+          usuario: this.user,
+          clave: this.pass
       });
+    } 
+
+     this.user="",
+     this.pass="";
   }
+
 }
