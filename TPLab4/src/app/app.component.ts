@@ -21,7 +21,7 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 })
 export class AppComponent {
 
-//////////////////////////////////////////////// PUNTUAR
+////////////////////////////////////// PUNTUAR
   public max:number = 10;
   public rate:number = 7;
   public isReadonly:boolean = false;
@@ -37,41 +37,66 @@ export class AppComponent {
   public resetStar():void {
     this.overStar = void 0;
   }
-
-/////////////////////////////////////////////////////////////////// ABM PIZZA
-
+////////////////////////////////////////////////////////////////////////////////////////// CONSTRUCTOR Y VARIABLES
+  
+  /////////////////////////////////////////////// Variables
+  
+  //Pizza
   title: string= 'Listado de Pizzas';
   public id= "";
   public nombre= "";
   public precio= "";
   public foto= "";
 
-  public datosPizzas: Array<any>;
+  //Usuario
+  titleUsuario: string= 'Listado de Usuarios';
+  public idUsuario= "";
+  public nombreUsuario= "";
+  public apellido= "";
+  public perfil= "";
+  public datosUsuarios: Array<any>;
 
+  //Pedido
+  titlePedido: string= 'Listado de Pedidos';
+  public idPedido= "";
+  public usuario= "";
+  public descripcion= "";
+  public total= "";
+  public datosPedidos: Array<any>;
+
+
+  //Login
+  public datosPizzas: Array<any>;
   items: FirebaseListObservable<any[]>;
   public user= "";
   public pass= "";
   public userLogin= "";
   public passLogin= "";
 
+
+  //////////////////////////////////////////// Constructor
   constructor(public datosPizz: PizzeriaService, public datosUsu: UsuarioService, public datosPed: PedidoService,
                 public db: AngularFireDatabase ,public angfire: AngularFireModule){
-
+    
+    // Firebase
     this.items = db.list('/items'); 
     console.log("datos usuarios", this.items);
-
+    
+    // Pizzas
     datosPizz.traerTodasLasPizzas()
     .then(datosPizz => {
       console.info("datos pizza", datosPizz);
       this.datosPizzas= datosPizz;
     })
 
+    // Usuarios
     this.datosUsu.traerTodosLosUsuarios()
     .then(datosUsu => {
       console.info("datos usuario", datosUsu);
       this.datosUsuarios= datosUsu;
     })
 
+    // Pedidos
     this.datosPed.traerTodosLosPedidos()
     .then(datosPed => {
       console.info("datos pedido", datosPed);
@@ -79,6 +104,9 @@ export class AppComponent {
     })
   }
 
+///////////////////////////////////////////////////////////////////// ABM PIZZA
+  
+  // Traer Pizza
   traerUnaPizza($id){
     this.datosPizz.traerUnaPizza($id)
       .then(datosPizz => {
@@ -87,10 +115,12 @@ export class AppComponent {
     })
   }
 
+  // Borrar Pizza
   borrarPizza($id){
     this.datosPizz.eliminarPizza($id);
   }
   
+  // Guardar Pizza
   altaPizza(){
     let nuevaPizza={nombre:this.id,
                       apellido:this.nombre,
@@ -100,17 +130,9 @@ export class AppComponent {
     this.datosPizz.agregarPizza(nuevaPizza);
   }
 
-  /////////////////////////////////////////////////////////////////// ABM USUARIO
+///////////////////////////////////////////////////////////////////// ABM USUARIO
 
-  titleUsuario: string= 'Listado de Usuarios';
-  public idUsuario= "";
-  public nombreUsuario= "";
-  public apellido= "";
-  public perfil= "";
-
-  public datosUsuarios: Array<any>;
-
-
+  // Traer Usuario
   traerUnUsuario($idUsuario){
     this.datosUsu.traerUnUsuario($idUsuario)
       .then(datosUsu => {
@@ -119,10 +141,12 @@ export class AppComponent {
     })
   }
 
+  // Borrar Usuario
   borrarUsuario($idUsuario){
     this.datosUsu.eliminarUsuario($idUsuario);
   }
   
+  // Guardar Usuario
   altaUsuario(){
     let nuevoUsuario={nombre:this.id,
                       apellido:this.nombre,
@@ -131,16 +155,9 @@ export class AppComponent {
     this.datosUsu.agregarUsuario(nuevoUsuario);
   }
 
-  /////////////////////////////////////////////////////////////////// ABM PEDIDO
+/////////////////////////////////////////////////////////////////////// ABM PEDIDO
 
-  titlePedido: string= 'Listado de Pedidos';
-  public idPedido= "";
-  public usuario= "";
-  public descripcion= "";
-  public total= "";
-
-  public datosPedidos: Array<any>;
-
+  // Traer Pedido
   traerUnPedido($idPedido){
     this.datosPed.traerUnPedido($idPedido)
       .then(datosPed => {
@@ -149,10 +166,12 @@ export class AppComponent {
     })
   }
 
+  // Borrar Pedido
   borrarPedido($idPedido){
     this.datosPed.eliminarPedido($idPedido);
   }
   
+  // Guardar Pedido
   altaPedido(){
     let nuevoPedido={ usuario:this.usuario,
                       descripcion:this.descripcion,
@@ -161,12 +180,25 @@ export class AppComponent {
     this.datosPed.agregarPedido(nuevoPedido);
   }
 
+/////////////////////////////////////////////////////////////////////// LOGIN
+  
+  // Registrarse
   registrarse(){
     if(this.user != "" && this.pass != ""){  
      this.items.push({
           usuario: this.user,
           clave: this.pass
       });
+    } 
+
+     this.user="",
+     this.pass="";
+  }
+
+  // Loguearse
+  login(){
+    if(this.userLogin != "" && this.passLogin != ""){  
+
     } 
 
      this.user="",
