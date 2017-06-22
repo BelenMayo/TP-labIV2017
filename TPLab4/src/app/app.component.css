@@ -190,3 +190,7 @@ em {
         font-size: 150px;
     }
   }
+
+    agm-map {
+        height: 300px;
+    }

@@ -1,15 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input, ViewChild  } from '@angular/core';
+import { HttpModule, Http } from '@angular/http';
+
+// Servicios
 import { PizzeriaService } from './servicios/pizzeria.service';
 import { UsuarioService } from './servicios/usuario.service';
 import { PedidoService } from './servicios/pedido.service';
-import { HttpModule, Http } from '@angular/http';
 
+// Maps
+import { AgmCoreModule } from '@agm/core';
+
+// Modal
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { ModalModule } from "ngx-modal";
+
+// Firebase
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 
+import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+import { AuthService } from './servicios/auth.service';
+
 import * as $ from 'jquery';
-import {ModalModule} from "ngx-modal";
-import { FileUploader } from 'ng2-file-upload';
 
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
  
@@ -47,6 +60,8 @@ export class AppComponent {
   public nombre= "";
   public precio= "";
   public foto= "";
+  public nombrePizza= "";
+  public precioPizza= "";
 
   //Usuario
   titleUsuario: string= 'Listado de Usuarios';
@@ -73,10 +88,16 @@ export class AppComponent {
   public userLogin= "";
   public passLogin= "";
 
+  usuarioLogin: Observable<firebase.User>;
+
+  //Maps
+  latitud: number = -34.761403;
+  longitud: number = -58.403909;
 
   //////////////////////////////////////////// Constructor
   constructor(public datosPizz: PizzeriaService, public datosUsu: UsuarioService, public datosPed: PedidoService,
-                public db: AngularFireDatabase ,public angfire: AngularFireModule){
+                public db: AngularFireDatabase ,public angfire: AngularFireModule, public afAuth: AngularFireAuth,
+                public authService: AuthService){
     
     // Firebase
     this.items = db.list('/items'); 
@@ -102,6 +123,9 @@ export class AppComponent {
       console.info("datos pedido", datosPed);
       this.datosPedidos= datosPed;
     })
+
+    // AUTH
+    this.usuarioLogin = afAuth.authState;
   }
 
 ///////////////////////////////////////////////////////////////////// ABM PIZZA
@@ -110,7 +134,7 @@ export class AppComponent {
   traerUnaPizza($id){
     this.datosPizz.traerUnaPizza($id)
       .then(datosPizz => {
-      console.info("datos persona", datosPizz);
+      console.info("datos pizza", datosPizz);
       this.datosPizzas= datosPizz;
     })
   }
@@ -118,17 +142,34 @@ export class AppComponent {
   // Borrar Pizza
   borrarPizza($id){
     this.datosPizz.eliminarPizza($id);
+
+    $('#modalBorrarPizza').modal('show');
   }
   
   // Guardar Pizza
   altaPizza(){
-    let nuevaPizza={nombre:this.id,
-                      apellido:this.nombre,
-                      foto:this.precio,
-                      password:this.foto
+    let nuevaPizza={
+                      nombre:this.nombre,
+                      precio:this.precio,
+                      foto:this.foto
                     };
+
+    console.log(this.nombre,this.precio,this.foto);
     this.datosPizz.agregarPizza(nuevaPizza);
   }
+
+  // Modificar Pizza
+  modificarPizza($id){
+
+      this.datosPizz.traerUnaPizza($id)
+        .then(datosPizz => {
+        console.info("datos pizza", datosPizz);
+        this.datosPizzas= datosPizz;
+      })
+          
+      document.getElementById("modalModificarPizza").click();
+
+    }
 
 ///////////////////////////////////////////////////////////////////// ABM USUARIO
 
@@ -136,7 +177,7 @@ export class AppComponent {
   traerUnUsuario($idUsuario){
     this.datosUsu.traerUnUsuario($idUsuario)
       .then(datosUsu => {
-      console.info("datos persona", datosUsu);
+      console.info("datos usuario", datosUsu);
       this.datosUsuarios= datosUsu;
     })
   }
@@ -196,13 +237,50 @@ export class AppComponent {
   }
 
   // Loguearse
-  login(){
-    if(this.userLogin != "" && this.passLogin != ""){  
+  // login(){
+  //   if(this.userLogin != "" && this.passLogin != ""){  
 
-    } 
+  //   } 
 
-     this.user="",
-     this.pass="";
+  //    this.user="",
+  //    this.pass="";
+  // }
+
+  // AUTH
+  email: string;
+  password: string;
+
+  loginAuth() {
+    console.log("llego");
+    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
   }
+
+  logout() {
+    this.afAuth.auth.signOut();
+  }
+
+  registrar(){
+    console.log("regis llego");
+    this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password);
+  }
+
+
+  // AUTH
+  // email: string;
+  // password: string;
+
+  // signup() {
+  //   this.authService.signup(this.email, this.password);
+  //   this.email = this.password = '';
+  // }
+
+  // login() {
+  //   this.authService.login(this.email, this.password);
+  //   this.email = this.password = '';    
+  // }
+
+  // logout() {
+  //   this.authService.logout();
+  // }
 
 }

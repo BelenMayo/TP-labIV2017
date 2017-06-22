@@ -129,16 +129,15 @@
     </thead>
     <tbody *ngFor="let datos of datosPizzas" style="text-align: left;"> 
       <tr>
-      <td><strong>{{ datos.nombre }}</  strong></td>
-      <td>$ {{ datos.precio }} </td>
+      <td><strong>{{ datos.nombre }}</strong></td>
+      <td>$ {{ datos.precio }}</td>
       <!--<td> <img src="./assets/fotos/{{ datos.foto }}" width="75px" height="75px"> </td>-->
       <td> <button class="btn btn-info" (click)="modalModificarPizza.open()"> MODIFICAR </button> </td>
-      <td> <button class="btn btn-danger"(click)="modalBorrarPizza.open()"> BORRAR </button> </td>
+      <td> <button class="btn btn-danger" (click)="borrarPizza(datos.id)"> BORRAR </button> </td>
       </tr>
     </tbody>
   </table>
 
-  
   <div class="row">
       <modal #modalModificarPizza  valign= "center">
           <modal-header>
@@ -146,9 +145,9 @@
           </modal-header>
           <modal-content>
               <b><div align=left style="padding-top:10px">Pizza</div></b> 
-              <input class="form-control" id="pizza" name="pizza" type="pizza">
+              <input [(ngModel)] = "nombrePizza" class="form-control" id="pizza" name="pizza" type="pizza">
               <b><div align=left style="padding-top:10px">Precio</div></b>   
-              <input class="form-control" id="precio" name="precio" type="precio">
+              <input [(ngModel)]="precioPizza" class="form-control" id="precio" name="precio" type="precio">
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="modalModificarPizza.close()"> GUARDAR </button>
@@ -162,31 +161,32 @@
           <modal-header>
               <h1>Eliminar Pizza</h1>
           </modal-header>
-          <modal-content>
-              <b><div align=left>Id</div></b>     
-              <input class="form-control" id="id" name="id" type="id">
+          <modal-content>   
+                ¿Seguro desea eliminar la pizza?
           </modal-content>
           <modal-footer>
-              <button class="btn btn-success"(click)="modalBorrarPizza.close()"> ELIMINAR </button>
+              <button class="btn btn-success"(click)="borrarPizza(datos.id)"> ELIMINAR </button>
               <button class="btn btn-danger"(click)="modalBorrarPizza.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
     </div>
 
   <div class="row">
-      <button class="btn btn-success"(click)="modalAgregarPizza.open()"> NUEVO PEDIDO </button>
+      <button class="btn btn-success"(click)="modalAgregarPizza.open()"> NUEVA PIZZA </button>
       <modal #modalAgregarPizza>
           <modal-header>
               <h1>Agregar Pizza</h1>
           </modal-header>
           <modal-content>
-              <b><div align=left style="padding-top:10px">Descripcion</div></b> 
-              <input class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" type="descripcion">
-              <b><div align=left style="padding-top:10px">Total</div></b>   
-              <input class="form-control" id="total" name="total" placeholder="Total" type="total">
+              <b><div align=left style="padding-top:10px">Nombre</div></b> 
+              <input [(ngModel)] = "nombre"class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" type="descripcion">
+              <b><div align=left style="padding-top:10px">Precio</div></b>   
+              <input [(ngModel)] = "precio" class="form-control" id="precio" name="precio" placeholder="Precio" type="precio">
+              <b><div align=left style="padding-top:10px">Foto</div></b>   
+              <input [(ngModel)] = "foto" class="form-control" id="foto" name="foto" placeholder="Foto" type="foto">
           </modal-content>
           <modal-footer>
-              <button class="btn btn-success"(click)="modalAgregarPizza.close()"> GUARDAR </button>
+              <button class="btn btn-success"(click)="altaPizza()"> GUARDAR </button>
               <button class="btn btn-danger"(click)="modalAgregarPizza.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
@@ -271,7 +271,7 @@
       <td><strong> {{ datos.descripcion }}</strong> </td>
       <td>$ {{ datos.total }}</td>
       <td> <button class="btn btn-info" (click)="modalModificarPedido.open()"> MODIFICAR </button> </td>
-      <td> <button class="btn btn-danger"(click)="modalBorrarPedido.open()"> BORRAR </button> </td>
+      <td> <button class="btn btn-danger" (click)="modalBorrarPedido.open()"> BORRAR </button> </td>
       </tr>
     </tbody>
   </table>
@@ -366,6 +366,9 @@
           <button class="btn btn-default pull-right" type="submit">Enviar</button>
         </div>
       </div>
+      <agm-map [latitude]="latitud" [longitude]="longitud" [zoom]="15">
+       <agm-marker [latitude]="latitud" [longitude]="longitud"></agm-marker>
+      </agm-map>
     </div>
   </div>
 </div>
@@ -488,10 +491,10 @@
   <div class="col-sm-5">
       <h3>Ingrese sus datos</h3>
       <b><div id="usuario" align=left style="padding-top:10px">Mail</div></b>   
-      <input class="form-control" [(ngModel)] = "user" name="mail" placeholder="Mail" type="mail...">
+      <input class="form-control" [(ngModel)] = "email" name="mail" placeholder="Mail" type="mail...">
       <b><div id="clave" align=left style="padding-top:10px">Contraseña</div></b>   
-      <input class="form-control" [(ngModel)] = "pass" name="clave" placeholder="Contraseña" type="clave"><br>
-      <button class="btn btn-primary btn-block"(click)="registrarse()"> REGISTRARSE </button><br>
+      <input class="form-control" [(ngModel)] = "password" name="clave" placeholder="Contraseña" type="clave"><br>
+      <button class="btn btn-primary btn-block"(click)="registrar()"> REGISTRARSE </button><br>
  </div>
 <div class="col-sm-2"> 
 </div>
@@ -509,37 +512,24 @@
           <modal-content>
             <img src="/assets/fotos/login.png" alt="Avatar" style="width:25%" class="w3-circle w3-margin-top">
               <b><div align=left style="padding-top:10px">Mail</div></b>   
-              <input class="form-control" [(ngModel)] = "userLogin" name="mail" placeholder="Mail" type="mail...">
+              <input class="form-control" [(ngModel)] = "email" name="mail" placeholder="Mail" type="mail...">
               <b><div align=left style="padding-top:10px">Contraseña</div></b>   
-              <input class="form-control" [(ngModel)] = "passLogin" name="clave" placeholder="Contraseña" type="clave"><br>
+              <input class="form-control" [(ngModel)] = "password" name="clave" placeholder="Contraseña" type="clave"><br>
               <button class="btn btn-info btn-block"(click)="modalLogin.close()"> ADMINISTRADOR </button>
               <button class="btn btn-warning btn-block"(click)="login.close()"> ENCARGADO </button>
               <button class="btn btn-primary btn-block"(click)="modalLogin.close()"> CLIENTE </button>
           </modal-content>
           <modal-footer>
-              <button class="btn btn-success"(click)="login()"> GUARDAR </button>
+              <button class="btn btn-success"(click)="loginAuth()"> GUARDAR </button>
               <button class="btn btn-danger"(click)="modalLogin.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
   </div>
 </div>
 
+
 <!-- GOOGLE MAPS -->
-<div id="googleMap" style="height:400px;width:100%;"></div>
-<script>
-function myMap() {
-var myCenter = new google.maps.LatLng(41.878114, -87.629798);
-var mapProp = {center:myCenter, zoom:12, scrollwheel:false, draggable:false, mapTypeId:google.maps.MapTypeId.ROADMAP};
-var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-var marker = new google.maps.Marker({position:myCenter});
-marker.setMap(map);
-}
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
-<!--
-To use this code on your website, get a free API key from Google.
-Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
--->
+<agm-map [latitude]="latitud" [longitude]="longitud"></agm-map>
 
 <footer class="container-fluid text-center">
   <a href="#myPage" title="To Top">
