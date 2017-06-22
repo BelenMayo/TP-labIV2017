@@ -93,6 +93,10 @@ export class AppComponent {
   //Maps
   latitud: number = -34.761403;
   longitud: number = -58.403909;
+  latitud2: number = -34.745494;
+  longitud2: number = -58.402984;
+  latitud3: number = -34.801383;
+  longitud3: number = -58.392185;
 
   //////////////////////////////////////////// Constructor
   constructor(public datosPizz: PizzeriaService, public datosUsu: UsuarioService, public datosPed: PedidoService,

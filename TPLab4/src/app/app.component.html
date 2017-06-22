@@ -366,11 +366,13 @@
           <button class="btn btn-default pull-right" type="submit">Enviar</button>
         </div>
       </div>
-      <agm-map [latitude]="latitud" [longitude]="longitud" [zoom]="15">
-       <agm-marker [latitude]="latitud" [longitude]="longitud"></agm-marker>
-      </agm-map>
     </div>
   </div>
+      <agm-map [latitude]="latitud" [longitude]="longitud" [zoom]="12">
+       <agm-marker [latitude]="latitud" [longitude]="longitud" [label]="'Lomas'" visible= true></agm-marker>
+       <agm-marker [latitude]="latitud2" [longitude]="longitud2" [label]="'Banfield'" visible= true></agm-marker>
+       <agm-marker [latitude]="latitud3" [longitude]="longitud3" [label]="'Adrogué'" visible= true></agm-marker>
+      </agm-map>
 </div>
 
 <!-- USUARIOS -->
@@ -529,7 +531,6 @@
 
 
 <!-- GOOGLE MAPS -->
-<agm-map [latitude]="latitud" [longitude]="longitud"></agm-map>
 
 <footer class="container-fluid text-center">
   <a href="#myPage" title="To Top">
