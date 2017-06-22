@@ -79,7 +79,6 @@
       [ngClass]="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}"
       [ngStyle]="{display: (overStar && !isReadonly) ? 'inline' : 'none'}">{{percent}}%</span>
 </div>
-
 </div>
 
 <!-- LOCALES -->
@@ -88,27 +87,56 @@
   <div class="row text-center">
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="assets/fotos/lomas.jpg" class="img-rounded" alt="Paris" width="400" height="300">
+        <carousel>
+        <slide>
+          <img src="assets/fotos/lomas.jpg"  height="400" width="300">
+        </slide>
+        <slide>
+          <img src="assets/fotos/lomas2.jpg" height="400" width="300">
+        </slide>
+        <slide>
+          <img src="assets/fotos/lomas3.jpg" height="400" width="300">
+        </slide>
+      </carousel>
         <p><strong>Lomas de Zamora</strong></p>
         <p>Loria 567</p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="assets/fotos/banfield.jpg" class="img-rounded" alt="banfield" width="400" height="300">
+        <carousel>
+        <slide>
+          <img src="assets/fotos/banfield.jpg" height="400" width="300">
+        </slide>
+        <slide>
+          <img src="assets/fotos/banfield2.jpg" height="400" width="300">
+        </slide>
+        <slide>
+          <img src="assets/fotos/banfield3.jpg" height="400" width="300">
+        </slide>
+      </carousel>
         <p><strong>Banfield</strong></p>
         <p>Gallo 1254</p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="assets/fotos/adrogue.jpg" class="img-rounded" alt="adrogue" width="400" height="300">
+        <carousel>
+        <slide>
+          <img src="assets/fotos/adrogue.jpg" height="400" width="300">
+        </slide>
+        <slide>
+          <img src="assets/fotos/adrogue2.jpg" height="400" width="300">
+        </slide>
+        <slide>
+          <img src="assets/fotos/adrogue3.jpg" height="400" width="300">
+        </slide>
+      </carousel>
         <p><strong>Adrogué </strong></p>
         <p>Espora 287</p>
       </div>
     </div>
   </div><br>
-
 </div>
 
 <!-- PIZZAS -->
