@@ -227,36 +227,26 @@ export class AppComponent {
 
 /////////////////////////////////////////////////////////////////////// LOGIN
   
-  // Registrarse
-  registrarse(){
-    if(this.user != "" && this.pass != ""){  
-     this.items.push({
-          usuario: this.user,
-          clave: this.pass
-      });
-    } 
-
-     this.user="",
-     this.pass="";
-  }
-
-  // Loguearse
-  // login(){
-  //   if(this.userLogin != "" && this.passLogin != ""){  
-
+  // registrarse(){
+  //   if(this.user != "" && this.pass != ""){  
+  //    this.items.push({
+  //         usuario: this.user,
+  //         clave: this.pass
+  //     });
   //   } 
 
   //    this.user="",
   //    this.pass="";
   // }
 
-  // AUTH
+  // Login y registrar
   email: string;
   password: string;
 
   loginAuth() {
     console.log("llego");
     this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
+    this.email = this.password = '';
   }
 
   logout() {
@@ -266,25 +256,7 @@ export class AppComponent {
   registrar(){
     console.log("regis llego");
     this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password);
+    this.email = this.password = '';
   }
-
-
-  // AUTH
-  // email: string;
-  // password: string;
-
-  // signup() {
-  //   this.authService.signup(this.email, this.password);
-  //   this.email = this.password = '';
-  // }
-
-  // login() {
-  //   this.authService.login(this.email, this.password);
-  //   this.email = this.password = '';    
-  // }
-
-  // logout() {
-  //   this.authService.logout();
-  // }
 
 }
