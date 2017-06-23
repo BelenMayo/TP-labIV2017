@@ -21,7 +21,7 @@ export class PizzeriaService {
   }
 
   traerUnaPizza(idPizza){
-    let url= 'http://localhost:8080/ApiLab4SP/public/index.php/pizzas' + idPizza; 
+    let url= 'http://localhost:8080/ApiLab4SP/public/index.php/pizza' + idPizza; 
     
       return this.http
         .get(url)
