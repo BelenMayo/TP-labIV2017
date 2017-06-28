@@ -62,6 +62,7 @@ export class AppComponent {
   public foto= "";
   public nombrePizza= "";
   public precioPizza= "";
+  public datosPizzas: Array<any>;
 
   //Usuario
   titleUsuario: string= 'Listado de Usuarios';
@@ -81,14 +82,16 @@ export class AppComponent {
 
 
   //Login
-  public datosPizzas: Array<any>;
   items: FirebaseListObservable<any[]>;
   public user= "";
   public pass= "";
-  public userLogin= "";
-  public passLogin= "";
-
+  public validaLogin="";
   usuarioLogin: Observable<firebase.User>;
+
+  // Perfiles
+  public administrador= "";
+  public empleado= "";
+  public cliente= "";
 
   //Maps
   latitud: number = -34.761403;
@@ -246,6 +249,7 @@ export class AppComponent {
   loginAuth() {
     console.log("llego");
     this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
+    this.validaLogin= "ok";
     this.email = this.password = '';
   }
 

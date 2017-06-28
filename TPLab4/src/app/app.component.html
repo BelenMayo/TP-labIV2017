@@ -283,6 +283,7 @@
   <div class="text-center">
     <h2>Pedidos</h2>
   </div>
+<label *ngIf="validaLogin == 'ok'">
 <div class="container">      
   <table class="table">
     <thead style="font-size: 14px;text-align: center;">
@@ -357,6 +358,7 @@
       </modal>
     </div>
   </div>
+</label>
 </div>
 
 
@@ -408,6 +410,7 @@
   <div class="text-center">
     <h2>Usuarios</h2>
   </div>
+<!--<label *ngIf="validaLogin == 'ok'">-->
 <div class="container">      
   <table class="table">
     <thead style="font-size: 14px;text-align: center;">
@@ -509,6 +512,7 @@
     </div>
 
   </div>
+<!--</label>-->
 </div>
 
 <!-- LOGIN -->
@@ -545,9 +549,9 @@
               <input class="form-control" [(ngModel)] = "email" name="mail" placeholder="Mail" type="mail...">
               <b><div align=left style="padding-top:10px">Contraseña</div></b>   
               <input class="form-control" [(ngModel)] = "password" name="clave" placeholder="Contraseña" type="clave"><br>
-              <button class="btn btn-info btn-block"(click)="modalLogin.close()"> ADMINISTRADOR </button>
-              <button class="btn btn-warning btn-block"(click)="login.close()"> ENCARGADO </button>
-              <button class="btn btn-primary btn-block"(click)="modalLogin.close()"> CLIENTE </button>
+              <button [(ngModel)] = "administrador" class="btn btn-info btn-block"(click)="modalLogin.close()"> ADMINISTRADOR </button>
+              <button [(ngModel)] = "empleado" class="btn btn-warning btn-block"(click)="modalLogin.close()"> ENCARGADO </button>
+              <button [(ngModel)] = "cliente"class="btn btn-primary btn-block"(click)="modalLogin.close()"> CLIENTE </button>
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="loginAuth()"> GUARDAR </button>

@@ -8,9 +8,12 @@
 
 <h1> Primera fecha de entrega</h1> 
 <h3>29 de Junio</h3>
-.
-.
-.
+
+- Diseño de la página: Secciones About, Locales, Pizzas, Promos, Pedidos, Contacto, Usuarios, Login.
+- Uso de 3 servicios (pizzería, pedidos, usuarios). ABM correspondiente.
+- API Rest.
+
+- Auth Login con Firebase.
 
 
 <h1> Segunda fecha de entrega</h1> 
