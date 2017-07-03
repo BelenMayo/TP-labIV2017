@@ -22,6 +22,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AuthService } from './servicios/auth.service';
 
+declare var jQuery:any;
 import * as $ from 'jquery';
 
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
@@ -84,7 +85,10 @@ export class AppComponent {
   //Login
   items: FirebaseListObservable<any[]>;
   public user= "";
+  public mail= "";
   public pass= "";
+  public email= "";
+  public password= "";
   public validaLogin="";
   usuarioLogin: Observable<firebase.User>;
 
@@ -149,8 +153,7 @@ export class AppComponent {
   // Borrar Pizza
   borrarPizza($id){
     this.datosPizz.eliminarPizza($id);
-
-    $('#modalBorrarPizza').modal('show');
+    document.getElementById("cerrarBorrarPizza").click();
   }
   
   // Guardar Pizza
@@ -163,6 +166,7 @@ export class AppComponent {
 
     console.log(this.nombre,this.precio,this.foto);
     this.datosPizz.agregarPizza(nuevaPizza);
+    document.getElementById("cerrarAgregarPizza").click();
   }
 
   // Modificar Pizza
@@ -192,6 +196,7 @@ export class AppComponent {
   // Borrar Usuario
   borrarUsuario($idUsuario){
     this.datosUsu.eliminarUsuario($idUsuario);
+    document.getElementById("cerrarBorrarUsuario").click();
   }
   
   // Guardar Usuario
@@ -201,6 +206,7 @@ export class AppComponent {
                       perfil:this.perfil,
                     };
     this.datosUsu.agregarUsuario(nuevoUsuario);
+    document.getElementById("cerrarAgregarUsuario").click();
   }
 
 /////////////////////////////////////////////////////////////////////// ABM PEDIDO
@@ -217,6 +223,7 @@ export class AppComponent {
   // Borrar Pedido
   borrarPedido($idPedido){
     this.datosPed.eliminarPedido($idPedido);
+    document.getElementById("cerrarBorrarPedido").click();
   }
   
   // Guardar Pedido
@@ -226,41 +233,45 @@ export class AppComponent {
                       total:this.total,
                     };
     this.datosPed.agregarPedido(nuevoPedido);
+    document.getElementById("cerrarAgregarPedido").click();
   }
 
 /////////////////////////////////////////////////////////////////////// LOGIN
   
-  // registrarse(){
-  //   if(this.user != "" && this.pass != ""){  
-  //    this.items.push({
-  //         usuario: this.user,
-  //         clave: this.pass
-  //     });
-  //   } 
-
-  //    this.user="",
-  //    this.pass="";
-  // }
-
   // Login y registrar
-  email: string;
-  password: string;
-
-  loginAuth() {
-    console.log("llego");
-    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
-    this.validaLogin= "ok";
-    this.email = this.password = '';
-  }
+  login() {
+    if(this.authService.login(this.mail, this.password)){
+        console.log("LOGUEADO!!!");
+    } else {
+        console.log("Error en Login!!!");
+    }
+    this.mail = this.password = '';
+    document.getElementById("cerrarLogin").click();
+  } 
 
   logout() {
-    this.afAuth.auth.signOut();
+    this.authService.logout();
   }
 
   registrar(){
-    console.log("regis llego");
-    this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password);
-    this.email = this.password = '';
+    this.authService.signup(this.email, this.pass);
+    this.email = this.pass = '';
+  }
+
+  setEncargado(){
+    this.mail = "encargado@gmail.com";
+    this.password = "123456"
+    
+  }
+
+  setEmpleado(){
+    this.mail = "empleado@gmail.com";
+    this.password = "123456"
+  }
+
+  setCliente(){
+    this.mail = "cliente@gmail.com";
+    this.password = "123456"
   }
 
 }

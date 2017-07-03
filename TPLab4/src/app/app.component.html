@@ -149,9 +149,9 @@
   <table class="table">
     <thead style="font-size: 14px;text-align: center;">
       <tr>
-        <th class="col-sm-5">NOMBRE</th>
-        <th class="col-sm-5">PRECIO</th>
-        <!--<<th>FOTO</th>-->
+        <th class="col-sm-3">NOMBRE</th>
+        <th class="col-sm-3">PRECIO</th>
+        <th class="col-sm-4">FOTO</th>
         <th colspan="2" style="padding-left: 80px" class="col-sm-2">ACCIONES</th>
       </tr>
     </thead>
@@ -159,9 +159,9 @@
       <tr>
       <td><strong>{{ datos.nombre }}</strong></td>
       <td>$ {{ datos.precio }}</td>
-      <!--<td> <img src="./assets/fotos/{{ datos.foto }}" width="75px" height="75px"> </td>-->
+      <td><img src="./assets/fotos/{{ datos.foto }}" width="75px" height="75px"></td>
       <td> <button class="btn btn-info" (click)="modalModificarPizza.open()"> MODIFICAR </button> </td>
-      <td> <button class="btn btn-danger" (click)="borrarPizza(datos.id)"> BORRAR </button> </td>
+      <td> <button class="btn btn-danger" (click)="modalBorrarPizza.open()"> BORRAR </button> </td>
       </tr>
     </tbody>
   </table>
@@ -179,7 +179,7 @@
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="modalModificarPizza.close()"> GUARDAR </button>
-              <button class="btn btn-danger"(click)="modalModificarPizza.close()"> CANCELAR </button>
+              <button class="btn btn-danger"  id= "cerrarModificarPizza" (click)="modalModificarPizza.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
   </div>
@@ -194,7 +194,7 @@
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="borrarPizza(datos.id)"> ELIMINAR </button>
-              <button class="btn btn-danger"(click)="modalBorrarPizza.close()"> CANCELAR </button>
+              <button class="btn btn-danger" id= "cerrarBorrarPizza" (click)="modalBorrarPizza.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
     </div>
@@ -215,7 +215,7 @@
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="altaPizza()"> GUARDAR </button>
-              <button class="btn btn-danger"(click)="modalAgregarPizza.close()"> CANCELAR </button>
+              <button class="btn btn-danger" id= "cerrarAgregarPizza" (click)="modalAgregarPizza.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
     </div>
@@ -283,7 +283,7 @@
   <div class="text-center">
     <h2>Pedidos</h2>
   </div>
-<label *ngIf="validaLogin == 'ok'">
+<!--<label *ngIf="validaLogin == 'ok'">-->
 <div class="container">      
   <table class="table">
     <thead style="font-size: 14px;text-align: center;">
@@ -318,7 +318,7 @@
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="modalModificarPedido.close()"> GUARDAR </button>
-              <button class="btn btn-danger"(click)="modalModificarPedido.close()"> CANCELAR </button>
+              <button class="btn btn-danger" id= "cerrarModificarPedido" (click)="modalModificarPedido.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
   </div>
@@ -334,7 +334,7 @@
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="modalBorrarPedido.close()"> ELIMINAR </button>
-              <button class="btn btn-danger"(click)="modalBorrarPedido.close()"> CANCELAR </button>
+              <button class="btn btn-danger" id= "cerrarBorrarPedido" (click)="modalBorrarPedido.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
     </div>
@@ -353,12 +353,12 @@
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="modalAgregarPedido.close()"> GUARDAR </button>
-              <button class="btn btn-danger"(click)="modalAgregarPedido.close()"> CANCELAR </button>
+              <button class="btn btn-danger" id= "cerrarAgregarPedido" (click)="modalAgregarPedido.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
     </div>
   </div>
-</label>
+<!--</label>-->
 </div>
 
 
@@ -461,7 +461,7 @@
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="modalModificarUsuario.close()"> GUARDAR </button>
-              <button class="btn btn-danger"(click)="modalModificarUsuario.close()"> CANCELAR </button>
+              <button class="btn btn-danger" id= "cerrarModificarUsuario" (click)="modalModificarUsuario.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
   </div>
@@ -506,7 +506,7 @@
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="modalCrearUsuario.close()"> GUARDAR </button>
-              <button class="btn btn-danger"(click)="modalCrearUsuario.close()"> CANCELAR </button>
+              <button class="btn btn-danger" id= "cerraBorrarUsuario"(click)="modalCrearUsuario.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
     </div>
@@ -525,9 +525,9 @@
   <div class="col-sm-5">
       <h3>Ingrese sus datos</h3>
       <b><div id="usuario" align=left style="padding-top:10px">Mail</div></b>   
-      <input class="form-control" [(ngModel)] = "email" name="mail" placeholder="Mail" type="mail...">
+      <input class="form-control" [(ngModel)] = "email" name="mail" placeholder="Mail" type="text">
       <b><div id="clave" align=left style="padding-top:10px">Contraseña</div></b>   
-      <input class="form-control" [(ngModel)] = "password" name="clave" placeholder="Contraseña" type="clave"><br>
+      <input class="form-control" [(ngModel)] = "pass" name="clave" placeholder="Contraseña" type="password"><br>
       <button class="btn btn-primary btn-block"(click)="registrar()"> REGISTRARSE </button><br>
  </div>
 <div class="col-sm-2"> 
@@ -546,16 +546,16 @@
           <modal-content>
             <img src="/assets/fotos/login.png" alt="Avatar" style="width:25%" class="w3-circle w3-margin-top">
               <b><div align=left style="padding-top:10px">Mail</div></b>   
-              <input class="form-control" [(ngModel)] = "email" name="mail" placeholder="Mail" type="mail...">
+              <input class="form-control" [(ngModel)] = "mail" name="mail" placeholder="Mail" type="text">
               <b><div align=left style="padding-top:10px">Contraseña</div></b>   
-              <input class="form-control" [(ngModel)] = "password" name="clave" placeholder="Contraseña" type="clave"><br>
-              <button [(ngModel)] = "administrador" class="btn btn-info btn-block"(click)="modalLogin.close()"> ADMINISTRADOR </button>
-              <button [(ngModel)] = "empleado" class="btn btn-warning btn-block"(click)="modalLogin.close()"> ENCARGADO </button>
-              <button [(ngModel)] = "cliente"class="btn btn-primary btn-block"(click)="modalLogin.close()"> CLIENTE </button>
+              <input class="form-control" [(ngModel)] = "password" name="clave" placeholder="Contraseña" type="password"><br>
+              <button class="btn btn-info btn-block"(click)="setEncargado()"> ENCARGADO </button>
+              <button class="btn btn-warning btn-block"(click)="setEmpleado()"> EMPLEADO </button>
+              <button class="btn btn-primary btn-block"(click)="setCliente()"> CLIENTE </button>
           </modal-content>
           <modal-footer>
-              <button class="btn btn-success"(click)="loginAuth()"> GUARDAR </button>
-              <button class="btn btn-danger"(click)="modalLogin.close()"> CANCELAR </button>
+              <button class="btn btn-success"(click)="login()"> LOGUEARSE </button>
+              <button class="btn btn-danger" id= "cerrarLogin" (click)="modalLogin.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
   </div>
@@ -565,7 +565,7 @@
   <a href="#myPage" title="To Top">
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
-  <p>Belén Mayo <a href="https://www.w3schools.com" title="Visit w3schools">www.belenmayo.com</a></p>
+  <p>Belén Mayo <a href="https://www.w3schools.com" title="Visit w3schools">www.pizzeriaargenta.com.ar</a></p>
 </footer>
 
 <script>
