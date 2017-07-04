@@ -90,7 +90,10 @@ export class AppComponent {
   public email= "";
   public password= "";
   public validaLogin="";
+  public completarCamposLogin= "";
+  public completarCamposSignUp= "";
   usuarioLogin: Observable<firebase.User>;
+  
 
   // Perfiles
   public administrador= "";
@@ -238,25 +241,59 @@ export class AppComponent {
 
 /////////////////////////////////////////////////////////////////////// LOGIN
   
-  // Login y registrar
-  login() {
-    if(this.authService.login(this.mail, this.password)){
-        console.log("LOGUEADO!!!");
-    } else {
-        console.log("Error en Login!!!");
+  // Login
+  login() {    
+    if(this.validaCamposLogin() == true){
+        if(this.authService.login(this.mail, this.password)){
+            console.log("LOGUEADO!!!");
+        } else {
+            console.log("Error en Login!!!");
+        }
+
+        this.mail = this.password = "";
+        this.completarCamposSignUp= "";
+        this.completarCamposLogin= "";
+
+        document.getElementById("cerrarLogin").click();
+      } else {
+        this.completarCamposLogin= "Por favor, complete todos los campos";
+      }
     }
-    this.mail = this.password = '';
-    document.getElementById("cerrarLogin").click();
-  } 
 
+  // Logout
   logout() {
-    this.authService.logout();
-  }
+        this.authService.logout();
+      }
 
+  // Registrar
   registrar(){
-    this.authService.signup(this.email, this.pass);
-    this.email = this.pass = '';
-  }
+    if(this.validaCamposSignUp() == true){
+        if(this.authService.signup(this.email, this.pass)){
+          this.email = this.pass = "";
+          this.completarCamposSignUp= "";
+        } else {
+          this.completarCamposSignUp= "Error en registración";
+        }
+      } else {
+        this.completarCamposSignUp= "Por favor, complete todos los campos";
+      }
+    }
+    
+
+  // Validación de campos
+    validaCamposLogin(): boolean{
+        if(this.mail == "") { return false; }
+        if(this.password == "") { return false; }
+        else { return true; }
+    }
+
+    validaCamposSignUp(): boolean{
+        if(this.email == "") { return false; }
+        if(this.pass == "") { return false; }
+        else { return true; }
+    }
+
+  // Perfil ////////////////////////////////////////////////////////////////////////////////
 
   setEncargado(){
     this.mail = "encargado@gmail.com";

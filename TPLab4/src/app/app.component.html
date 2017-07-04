@@ -8,9 +8,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="jquery.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
@@ -521,21 +520,28 @@
     <h2>Registrarse o Loguearse</h2>
   </div>
 
-  <div class="col-sm-12">
-  <div class="col-sm-5">
+<div class="col-sm-12">
+<div class="col-sm-5">
       <h3>Ingrese sus datos</h3>
       <b><div id="usuario" align=left style="padding-top:10px">Mail</div></b>   
       <input class="form-control" [(ngModel)] = "email" name="mail" placeholder="Mail" type="text">
       <b><div id="clave" align=left style="padding-top:10px">Contraseña</div></b>   
       <input class="form-control" [(ngModel)] = "pass" name="clave" placeholder="Contraseña" type="password"><br>
       <button class="btn btn-primary btn-block"(click)="registrar()"> REGISTRARSE </button><br>
+      <label style="color:red;">{{completarCamposSignUp}}</label>
  </div>
 <div class="col-sm-2"> 
 </div>
   <div class="col-sm-4"> 
-      <h3>¿Ya se encuentra registrado? Ingrese</h3><br>
-      <button class="btn btn-success btn-block"(click)="modalLogin.open()"> LOGIN </button>
- </div>
+      <h3>¿Se encuentra registrado? Ingrese</h3><br>
+      <button class="btn btn-success btn-block" id="loginButton" (click)="modalLogin.open()"> LOGIN </button>
+  </div>
+<div class="col-sm-2"> 
+</div>
+   <div class="col-sm-4"> 
+      <br><h3>¿Desea salir?</h3><br>
+      <button class="btn btn-danger btn-block"(click)="logout()"> LOGOUT </button>
+   </div>
 </div>
 
 <div class="row">
@@ -549,6 +555,7 @@
               <input class="form-control" [(ngModel)] = "mail" name="mail" placeholder="Mail" type="text">
               <b><div align=left style="padding-top:10px">Contraseña</div></b>   
               <input class="form-control" [(ngModel)] = "password" name="clave" placeholder="Contraseña" type="password"><br>
+              <label style="color:red;">{{completarCamposLogin}}</label>
               <button class="btn btn-info btn-block"(click)="setEncargado()"> ENCARGADO </button>
               <button class="btn btn-warning btn-block"(click)="setEmpleado()"> EMPLEADO </button>
               <button class="btn btn-primary btn-block"(click)="setCliente()"> CLIENTE </button>
@@ -567,6 +574,12 @@
   </a>
   <p>Belén Mayo <a href="https://www.w3schools.com" title="Visit w3schools">www.pizzeriaargenta.com.ar</a></p>
 </footer>
+
+<script>
+ $("#loginButton").click(function(){
+    alert("The paragraph was clicked.");
+});
+</script>
 
 <script>
 $(document).ready(function(){

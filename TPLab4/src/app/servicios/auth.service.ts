@@ -31,6 +31,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Logueado correctamente!');
+        return true;
       })
       .catch(err => {
         console.log('Hubo un error al loguearse:',err.message);
