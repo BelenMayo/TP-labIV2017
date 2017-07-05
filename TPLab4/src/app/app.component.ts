@@ -65,6 +65,12 @@ export class AppComponent {
   public precioPizza= "";
   public datosPizzas: Array<any>;
 
+  public mbPizza:  "";
+  public mmIdPizza:  "";
+  public mmNombrePizza:  "";
+  public mmPrecioPizza:  "";
+  public mmFotoPizza:  "";
+
   //Usuario
   titleUsuario: string= 'Listado de Usuarios';
   public idUsuario= "";
@@ -81,6 +87,11 @@ export class AppComponent {
   public total= "";
   public datosPedidos: Array<any>;
 
+  public mbPedido:  "";
+  public mmIdPedido:  "";
+  public mmUsuarioPedido:  "";
+  public mmDescripcionPedido:  "";
+  public mmTotalPedido:  "";
 
   //Login
   items: FirebaseListObservable<any[]>;
@@ -144,6 +155,17 @@ export class AppComponent {
 
 ///////////////////////////////////////////////////////////////////// ABM PIZZA
   
+  // Traer Pizzas
+  TraerTodasLasPizzas(){    
+        this.datosPizz.traerTodasLasPizzas()
+        .then(datosPizz => {
+        console.info("datos pizza", datosPizz);
+        this.datosPizzas= datosPizz;
+        }).catch( error => {
+          console.log(error);
+        });
+    }
+
   // Traer Pizza
   traerUnaPizza($id){
     this.datosPizz.traerUnaPizza($id)
@@ -153,10 +175,21 @@ export class AppComponent {
     })
   }
 
+  abrirModalBorrarPizza($id){
+    this.mbPizza= $id;
+    document.getElementById("mBorrarPizza").click();
+  }
+
   // Borrar Pizza
   borrarPizza($id){
     this.datosPizz.eliminarPizza($id);
     document.getElementById("cerrarBorrarPizza").click();
+
+      var temp=this;
+      setTimeout(function(){
+          temp.TraerTodasLasPizzas();
+      }, 500);  
+              
   }
   
   // Guardar Pizza
@@ -170,22 +203,57 @@ export class AppComponent {
     console.log(this.nombre,this.precio,this.foto);
     this.datosPizz.agregarPizza(nuevaPizza);
     document.getElementById("cerrarAgregarPizza").click();
+
+      var temp=this;
+      setTimeout(function(){
+          temp.TraerTodasLasPizzas();
+      }, 600);  
+  }
+
+  abrirModalModificarPizza($id, $nombre, $precio, $foto){
+    this.mmIdPizza= $id;
+    this.mmNombrePizza= $nombre;
+    this.mmPrecioPizza= $precio;
+    this.mmFotoPizza= $foto;
+    document.getElementById("mModificarPizza").click();
   }
 
   // Modificar Pizza
   modificarPizza($id){
 
-      this.datosPizz.traerUnaPizza($id)
-        .then(datosPizz => {
-        console.info("datos pizza", datosPizz);
-        this.datosPizzas= datosPizz;
-      })
-          
-      document.getElementById("modalModificarPizza").click();
+    let nuevaPizza={
+                      nombre:this.mmNombrePizza,
+                      precio:this.mmPrecioPizza,
+                      foto:this.mmFotoPizza
+                    };
+
+    this.datosPizz.modificarPizza($id, nuevaPizza);
+
+      this.mmIdPizza= "";
+      this.mmNombrePizza= "";
+      this.mmPrecioPizza= "";
+      this.mmFotoPizza= ""; 
+      document.getElementById("cerrarModificarPizza").click();
+
+        var temp=this;
+          setTimeout(function(){
+          temp.TraerTodasLasPizzas();
+        }, 600);  
 
     }
 
 ///////////////////////////////////////////////////////////////////// ABM USUARIO
+
+  // Traer Usuarios
+  TraerTodosLosUsuarios(){    
+        this.datosUsu.traerTodosLosUsuarios()
+        .then(datosUsu => {
+        console.info("datos usuario", datosUsu);
+        this.datosUsuarios= datosUsu;
+        }).catch( error => {
+          console.log(error);
+        });
+    }
 
   // Traer Usuario
   traerUnUsuario($idUsuario){
@@ -214,6 +282,17 @@ export class AppComponent {
 
 /////////////////////////////////////////////////////////////////////// ABM PEDIDO
 
+  // Traer Pedidos
+  TraerTodosLosPedidos(){    
+        this.datosPed.traerTodosLosPedidos()
+        .then(datosPed => {
+        console.info("datos pedido", datosPed);
+        this.datosPedidos= datosPed;
+        }).catch( error => {
+          console.log(error);
+        });
+    }
+
   // Traer Pedido
   traerUnPedido($idPedido){
     this.datosPed.traerUnPedido($idPedido)
@@ -223,10 +302,20 @@ export class AppComponent {
     })
   }
 
+  abrirModalBorrarPedido($id){
+    this.mbPedido= $id;
+    document.getElementById("mBorrarPedido").click();
+  }
+
   // Borrar Pedido
   borrarPedido($idPedido){
     this.datosPed.eliminarPedido($idPedido);
     document.getElementById("cerrarBorrarPedido").click();
+
+        var temp=this;
+          setTimeout(function(){
+          temp.TraerTodosLosPedidos();
+        }, 600);  
   }
   
   // Guardar Pedido
@@ -237,7 +326,44 @@ export class AppComponent {
                     };
     this.datosPed.agregarPedido(nuevoPedido);
     document.getElementById("cerrarAgregarPedido").click();
+
+        var temp=this;
+          setTimeout(function(){
+          temp.TraerTodosLosPedidos();
+        }, 700);  
   }
+
+  abrirModalModificarPedido($id, $usuario, $descripcion, $total){
+    this.mmIdPizza= $id;
+    this.mmUsuarioPedido= $usuario;
+    this.mmDescripcionPedido= $descripcion;
+    this.mmTotalPedido= $total;
+    document.getElementById("mModificarPedido").click();
+  }
+
+  // Modificar Pedido
+  modificarPedido($id){
+
+    let nuevoPedido={
+                      usuario:this.usuario,
+                      descripcion:this.descripcion,
+                      precio:this.total
+                    };
+
+    this.datosPed.modificarPedido($id, nuevoPedido);
+
+      this.mmIdPedido= "";
+      this.mmUsuarioPedido= "";
+      this.mmDescripcionPedido= "";
+      this.mmTotalPedido= ""; 
+      document.getElementById("cerrarModificarPedido").click();
+
+        var temp=this;
+          setTimeout(function(){
+          temp.TraerTodosLosPedidos();
+        }, 700);  
+
+    }
 
 /////////////////////////////////////////////////////////////////////// LOGIN
   

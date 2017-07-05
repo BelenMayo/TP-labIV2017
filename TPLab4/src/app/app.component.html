@@ -159,8 +159,10 @@
       <td><strong>{{ datos.nombre }}</strong></td>
       <td>$ {{ datos.precio }}</td>
       <td><img src="./assets/fotos/{{ datos.foto }}" width="75px" height="75px"></td>
-      <td> <button class="btn btn-info" (click)="modalModificarPizza.open()"> MODIFICAR </button> </td>
-      <td> <button class="btn btn-danger" (click)="modalBorrarPizza.open()"> BORRAR </button> </td>
+      <td> <button class="btn btn-info" (click)="abrirModalModificarPizza(datos.id, datos.nombre, datos.precio, datos.foto);"> MODIFICAR </button> </td>
+      <input type= "hidden" id= "mModificarPizza" (click)="modalModificarPizza.open()">
+      <td> <button class="btn btn-danger" (click)="abrirModalBorrarPizza(datos.id);"> BORRAR </button> </td>
+      <input type= "hidden" id= "mBorrarPizza"  (click)="modalBorrarPizza.open()">
       </tr>
     </tbody>
   </table>
@@ -172,12 +174,14 @@
           </modal-header>
           <modal-content>
               <b><div align=left style="padding-top:10px">Pizza</div></b> 
-              <input [(ngModel)] = "nombrePizza" class="form-control" id="pizza" name="pizza" type="pizza">
+              <input [(ngModel)] = "mmNombrePizza" class="form-control" id="pizza" name="pizza" type="text">
               <b><div align=left style="padding-top:10px">Precio</div></b>   
-              <input [(ngModel)]="precioPizza" class="form-control" id="precio" name="precio" type="precio">
+              <input [(ngModel)]="mmPrecioPizza" class="form-control" id="precio" name="precio" type="text">
+              <b><div align=left style="padding-top:10px">Foto</div></b>   
+              <input [(ngModel)]="mmFotoPizza" class="form-control" id="foto" name="foto" type="text">
           </modal-content>
           <modal-footer>
-              <button class="btn btn-success"(click)="modalModificarPizza.close()"> GUARDAR </button>
+              <button class="btn btn-success"(click)="modificarPizza(mmIdPizza)"> GUARDAR </button>
               <button class="btn btn-danger"  id= "cerrarModificarPizza" (click)="modalModificarPizza.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
@@ -189,10 +193,10 @@
               <h1>Eliminar Pizza</h1>
           </modal-header>
           <modal-content>   
-                ¿Seguro desea eliminar la pizza?
+                ¿Seguro desea eliminar la pizza {{mbPizza}}?
           </modal-content>
           <modal-footer>
-              <button class="btn btn-success"(click)="borrarPizza(datos.id)"> ELIMINAR </button>
+              <button class="btn btn-success"(click)="borrarPizza(mbPizza)"> ELIMINAR </button>
               <button class="btn btn-danger" id= "cerrarBorrarPizza" (click)="modalBorrarPizza.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
@@ -206,11 +210,11 @@
           </modal-header>
           <modal-content>
               <b><div align=left style="padding-top:10px">Nombre</div></b> 
-              <input [(ngModel)] = "nombre"class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" type="descripcion">
+              <input [(ngModel)] = "nombre" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion.." type="descripcion">
               <b><div align=left style="padding-top:10px">Precio</div></b>   
-              <input [(ngModel)] = "precio" class="form-control" id="precio" name="precio" placeholder="Precio" type="precio">
+              <input [(ngModel)] = "precio" class="form-control" id="precio" name="precio" placeholder="Precio.." type="precio">
               <b><div align=left style="padding-top:10px">Foto</div></b>   
-              <input [(ngModel)] = "foto" class="form-control" id="foto" name="foto" placeholder="Foto" type="foto">
+              <input [(ngModel)] = "foto" class="form-control" id="foto" name="foto" placeholder="Foto.." type="foto">
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="altaPizza()"> GUARDAR </button>
@@ -298,8 +302,10 @@
       <td>{{ datos.usuario }}</td>
       <td><strong> {{ datos.descripcion }}</strong> </td>
       <td>$ {{ datos.total }}</td>
-      <td> <button class="btn btn-info" (click)="modalModificarPedido.open()"> MODIFICAR </button> </td>
-      <td> <button class="btn btn-danger" (click)="modalBorrarPedido.open()"> BORRAR </button> </td>
+      <input type= "hidden" id= "mModificarPedido" (click)="modalModificarPedido.open()">
+      <td> <button class="btn btn-info" (click)="abrirModalModificarPedido(datos.id, datos.usuario, datos.descripcion, datos.total);"> MODIFICAR </button> </td>
+      <input type= "hidden" id= "mBorrarPedido" (click)="modalBorrarPedido.open()">
+      <td> <button class="btn btn-danger" id="mBorrarPedido" (click)="abrirModalBorrarPedido(datos.id);"> BORRAR </button> </td>
       </tr>
     </tbody>
   </table>
@@ -310,13 +316,15 @@
               <h1>Modificar Pedido</h1>
           </modal-header>
           <modal-content>
-              <b><div align=left style="padding-top:10px">Descripcion</div></b> 
-              <input class="form-control" id="descripcion" name="descripcion"type="descripcion">
+              <b><div align=left style="padding-top:10px">Usuario</div></b> 
+              <input [(ngModel)] = "mmUsuarioPedido" class="form-control" id="usuario" name="usuario" type="text">
+              <b><div align=left style="padding-top:10px">Descripción</div></b>   
+              <input [(ngModel)]="mmDescripcionPedido" class="form-control" id="descripcion" name="descripcion" type="text">
               <b><div align=left style="padding-top:10px">Total</div></b>   
-              <input class="form-control" id="total" name="total" type="total...">
+              <input [(ngModel)]="mmTotalPedido" class="form-control" id="total" name="total" type="text">
           </modal-content>
           <modal-footer>
-              <button class="btn btn-success"(click)="modalModificarPedido.close()"> GUARDAR </button>
+              <button class="btn btn-success"(click)="modificarPedido(mmIdPedido)"> GUARDAR </button>
               <button class="btn btn-danger" id= "cerrarModificarPedido" (click)="modalModificarPedido.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
@@ -327,12 +335,11 @@
           <modal-header>
               <h1>Eliminar Pedido</h1>
           </modal-header>
-          <modal-content>
-              <b><div align=left>Id</div></b>     
-              <input class="form-control" id="id" name="id" type="id">
+          <modal-content>   
+                ¿Seguro desea eliminar el pedido {{mbPedido}}?
           </modal-content>
           <modal-footer>
-              <button class="btn btn-success"(click)="modalBorrarPedido.close()"> ELIMINAR </button>
+              <button class="btn btn-success"(click)="borrarPedido(mbPedido)"> ELIMINAR </button>
               <button class="btn btn-danger" id= "cerrarBorrarPedido" (click)="modalBorrarPedido.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
@@ -345,13 +352,15 @@
               <h1>Agregar Pedido</h1>
           </modal-header>
           <modal-content>  
+              <b><div align=left style="padding-top:10px">Usuario</div></b> 
+              <input class="form-control" [(ngModel)] = "usuario" name="usuario" placeholder="Usuario.." type="text">
               <b><div align=left style="padding-top:10px">Descripcion</div></b> 
-              <input class="form-control" id="descripcion" name="descripcion" placeholder="descripcion..." type="descripcion">
+              <input class="form-control" [(ngModel)] = "descripcion" name="descripcion" placeholder="Descripción.." type="text">
               <b><div align=left style="padding-top:10px">Total</div></b>   
-              <input class="form-control" id="total" name="total" placeholder="Mail" type="total">
+              <input class="form-control" [(ngModel)] = "total"  name="total" placeholder="Total.." type="text">
           </modal-content>
           <modal-footer>
-              <button class="btn btn-success"(click)="modalAgregarPedido.close()"> GUARDAR </button>
+              <button class="btn btn-success"(click)="altaPedido()"> GUARDAR </button>
               <button class="btn btn-danger" id= "cerrarAgregarPedido" (click)="modalAgregarPedido.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
@@ -574,12 +583,6 @@
   </a>
   <p>Belén Mayo <a href="https://www.w3schools.com" title="Visit w3schools">www.pizzeriaargenta.com.ar</a></p>
 </footer>
-
-<script>
- $("#loginButton").click(function(){
-    alert("The paragraph was clicked.");
-});
-</script>
 
 <script>
 $(document).ready(function(){

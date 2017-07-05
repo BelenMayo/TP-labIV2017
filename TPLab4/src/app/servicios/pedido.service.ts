@@ -42,6 +42,19 @@ export class PedidoService {
              .catch(this.error)
   }
 
+  modificarPedido(idPedido, pedido) {
+    let datos={ usuario:pedido.usuario,
+                descripcion:pedido.descripcion,
+                precio:pedido.precio,
+                id:pedido.id
+              };
+
+    this.http.put("http://localhost:8080/ApiLab4SP/public/index.php/pedido/actualizar/" + idPedido, datos)
+             .toPromise()
+             .then()
+             .catch(this.error)
+  }
+
   eliminarPedido(idPedido) {
     let datos = {"id": idPedido};
     let headers = new Headers({ 'Content-Type': 'application/json' });

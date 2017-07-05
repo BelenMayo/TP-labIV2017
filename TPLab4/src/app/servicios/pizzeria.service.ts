@@ -42,6 +42,19 @@ export class PizzeriaService {
              .catch(this.error)
   }
 
+  modificarPizza(idPizza, pizza) {
+    let datos={ nombre:pizza.nombre,
+                foto:pizza.foto,
+                precio:pizza.precio,
+                id:idPizza
+              };
+    console.log(idPizza, pizza.nombre, pizza.foto, pizza.precio);
+    this.http.put("http://localhost:8080/ApiLab4SP/public/index.php/pizza/actualizar/" + idPizza, datos)
+             .toPromise()
+             .then()
+             .catch(this.error)
+  }
+
   eliminarPizza(idPizza) {
     let datos = {"id": idPizza};
     let headers = new Headers({ 'Content-Type': 'application/json' });
