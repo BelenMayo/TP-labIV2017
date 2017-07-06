@@ -161,7 +161,7 @@
       <td><img src="./assets/fotos/{{ datos.foto }}" width="75px" height="75px"></td>
       <td> <button class="btn btn-info" (click)="abrirModalModificarPizza(datos.id, datos.nombre, datos.precio, datos.foto);"> MODIFICAR </button> </td>
       <input type= "hidden" id= "mModificarPizza" (click)="modalModificarPizza.open()">
-      <td> <button class="btn btn-danger" (click)="abrirModalBorrarPizza(datos.id);"> BORRAR </button> </td>
+      <td> <button class="btn btn-danger" (click)="abrirModalBorrarPizza(datos.id, datos.nombre);"> BORRAR </button> </td>
       <input type= "hidden" id= "mBorrarPizza"  (click)="modalBorrarPizza.open()">
       </tr>
     </tbody>
@@ -174,11 +174,11 @@
           </modal-header>
           <modal-content>
               <b><div align=left style="padding-top:10px">Pizza</div></b> 
-              <input [(ngModel)] = "mmNombrePizza" class="form-control" id="pizza" name="pizza" type="text">
+              <input [(ngModel)] = "mmNombrePizza" class="form-control" type="text">
               <b><div align=left style="padding-top:10px">Precio</div></b>   
-              <input [(ngModel)]="mmPrecioPizza" class="form-control" id="precio" name="precio" type="text">
+              <input [(ngModel)]="mmPrecioPizza" class="form-control" type="text">
               <b><div align=left style="padding-top:10px">Foto</div></b>   
-              <input [(ngModel)]="mmFotoPizza" class="form-control" id="foto" name="foto" type="text">
+              <input [(ngModel)]="mmFotoPizza" class="form-control"type="text">
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="modificarPizza(mmIdPizza)"> GUARDAR </button>
@@ -193,7 +193,7 @@
               <h1>Eliminar Pizza</h1>
           </modal-header>
           <modal-content>   
-                ¿Seguro desea eliminar la pizza {{mbPizza}}?
+                ¿Seguro desea eliminar la pizza {{nombrePizzaBorrar}}?
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="borrarPizza(mbPizza)"> ELIMINAR </button>
@@ -210,11 +210,11 @@
           </modal-header>
           <modal-content>
               <b><div align=left style="padding-top:10px">Nombre</div></b> 
-              <input [(ngModel)] = "nombre" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion.." type="descripcion">
+              <input [(ngModel)] = "nombre" class="form-control" placeholder="Descripcion.." type="text">
               <b><div align=left style="padding-top:10px">Precio</div></b>   
-              <input [(ngModel)] = "precio" class="form-control" id="precio" name="precio" placeholder="Precio.." type="precio">
+              <input [(ngModel)] = "precio" class="form-control" placeholder="Precio.." type="text">
               <b><div align=left style="padding-top:10px">Foto</div></b>   
-              <input [(ngModel)] = "foto" class="form-control" id="foto" name="foto" placeholder="Foto.." type="foto">
+              <input [(ngModel)] = "foto" class="form-control" placeholder="Foto.." type="text">
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="altaPizza()"> GUARDAR </button>
@@ -291,6 +291,7 @@
   <table class="table">
     <thead style="font-size: 14px;text-align: center;">
       <tr>
+        <th class="col-sm-3">NRO.</th>
         <th class="col-sm-3">USUARIO</th>
         <th class="col-sm-3">DESCRIPCION</th>
         <th class="col-sm-3">TOTAL</th>
@@ -299,6 +300,7 @@
     </thead>
     <tbody *ngFor="let datos of datosPedidos" style="text-align: left;"> 
       <tr>
+      <td>{{ datos.id }}</td>
       <td>{{ datos.usuario }}</td>
       <td><strong> {{ datos.descripcion }}</strong> </td>
       <td>$ {{ datos.total }}</td>
@@ -317,11 +319,11 @@
           </modal-header>
           <modal-content>
               <b><div align=left style="padding-top:10px">Usuario</div></b> 
-              <input [(ngModel)] = "mmUsuarioPedido" class="form-control" id="usuario" name="usuario" type="text">
+              <input [(ngModel)] = "mmUsuarioPedido" class="form-control" type="text">
               <b><div align=left style="padding-top:10px">Descripción</div></b>   
-              <input [(ngModel)]="mmDescripcionPedido" class="form-control" id="descripcion" name="descripcion" type="text">
+              <input [(ngModel)]="mmDescripcionPedido" class="form-control"btype="text">
               <b><div align=left style="padding-top:10px">Total</div></b>   
-              <input [(ngModel)]="mmTotalPedido" class="form-control" id="total" name="total" type="text">
+              <input [(ngModel)]="mmTotalPedido" class="form-control" type="text">
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="modificarPedido(mmIdPedido)"> GUARDAR </button>
@@ -353,11 +355,11 @@
           </modal-header>
           <modal-content>  
               <b><div align=left style="padding-top:10px">Usuario</div></b> 
-              <input class="form-control" [(ngModel)] = "usuario" name="usuario" placeholder="Usuario.." type="text">
+              <input class="form-control" [(ngModel)] = "usuario" placeholder="Usuario.." type="text">
               <b><div align=left style="padding-top:10px">Descripcion</div></b> 
-              <input class="form-control" [(ngModel)] = "descripcion" name="descripcion" placeholder="Descripción.." type="text">
+              <input class="form-control" [(ngModel)] = "descripcion" placeholder="Descripción.." type="text">
               <b><div align=left style="padding-top:10px">Total</div></b>   
-              <input class="form-control" [(ngModel)] = "total"  name="total" placeholder="Total.." type="text">
+              <input class="form-control" [(ngModel)] = "total" placeholder="Total.." type="text">
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="altaPedido()"> GUARDAR </button>
@@ -440,8 +442,10 @@
       <td>{{ datos.numero }}</td>
       <td>{{ datos.localidad }}</td>
       <td>{{ datos.telefono }}</td>
-      <td><button class="btn btn-info" (click)="modalModificarUsuario.open()"> MODIFICAR </button></td>
-      <td><button class="btn btn-danger"(click)="modalBorrarUsuario.open()"> BORRAR </button></td>
+      <input type= "hidden" id= "mModificarUsuario" (click)="modalModificarUsuario.open()">
+      <td><button class="btn btn-info" (click)="abrirModalModificarUsuario(datos.id, datos.nombre, datos.apellido, datos.perfil, datos.calle, datos.numero, datos.localidad, datos.telefono, datos.mail)"> MODIFICAR </button></td>
+      <input type= "hidden" id= "mBorrarUsuario" (click)="modalBorrarUsuario.open()">
+      <td><button class="btn btn-danger" (click)="abrirModalBorrarUsuario(datos.id, datos.nombre, datos.apellido)"> BORRAR </button></td>
       </tr>
     </tbody>
   </table>
@@ -453,19 +457,21 @@
           </modal-header>
           <modal-content>
               <b><div align=left style="padding-top:10px">Nombre</div></b> 
-              <input class="form-control" id="nombre" name="nombre" placeholder="Nombre" type="nombre">
+              <input class="form-control" [(ngModel)] = "mmNombreUsuario" placeholder="Nombre.." type="text">
               <b><div align=left style="padding-top:10px">Apellido</div></b>   
-              <input class="form-control" id="apellido" name="apellido" placeholder="Mail" type="apellido">
+              <input class="form-control" [(ngModel)] = "mmApellidoUsuario" placeholder="Mail.." type="text">
               <b><div align=left style="padding-top:10px">Cargo</div></b>   
-              <input class="form-control" id="cargo" name="cargo" placeholder="Cargo" type="cargo">
+              <input class="form-control" [(ngModel)] = "mmPerfilUsuario" placeholder="Cargo.." type="text">
                <b><div align=left style="padding-top:10px">Calle</div></b>   
-              <input class="form-control" id="calle" name="calle" placeholder="Calle" type="calle">
+              <input class="form-control" [(ngModel)] = "mmCalleUsuario" placeholder="Calle.." type="text">
               <b><div align=left style="padding-top:10px">Número</div></b>   
-              <input class="form-control" id="numero" name="numero" placeholder="Numero" type="numero">
+              <input class="form-control" [(ngModel)] = "mmNumeroUsuario" placeholder="Numero.." type="text">
               <b><div align=left style="padding-top:10px">Localidad</div></b>   
-              <input class="form-control" id="localidad" name="localidad" placeholder="Localidad" type="localidad">
+              <input class="form-control" [(ngModel)] = "mmLocalidadUsuario" placeholder="Localidad.." type="text">
               <b><div align=left style="padding-top:10px">Teléfono</div></b>   
-              <input class="form-control" id="telefono" name="telefono" placeholder="Telefono" type="telefono">
+              <input class="form-control" [(ngModel)] = "mmTelefonoUsuario" placeholder="Teléfono.." type="text">
+              <b><div align=left style="padding-top:10px">Mail</div></b>   
+              <input class="form-control" [(ngModel)] = "mmMailUsuario" placeholder="Mail.." type="text">
           </modal-content>
           <modal-footer>
               <button class="btn btn-success"(click)="modalModificarUsuario.close()"> GUARDAR </button>
@@ -479,13 +485,12 @@
           <modal-header>
               <h1>Eliminar Usuario</h1>
           </modal-header>
-          <modal-content>
-              <b><div align=left>Id</div></b>     
-              <input class="form-control" id="id" name="id" type="id">
+          <modal-content>   
+                ¿Seguro desea eliminar el usuario {{mbNombre}} {{mbApellido}}?
           </modal-content>
           <modal-footer>
-              <button class="btn btn-success"(click)="modalBorrarUsuario.close()"> ELIMINAR </button>
-              <button class="btn btn-danger"(click)="modalBorrarUsuario.close()"> CANCELAR </button>
+              <button class="btn btn-success"(click)="borrarUsuario(mbUsuario)"> ELIMINAR </button>
+              <button class="btn btn-danger" id="cerrarBorrarUsuario" (click)="modalBorrarUsuario.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
     </div>
@@ -498,23 +503,25 @@
           </modal-header>
           <modal-content>
               <b><div align=left style="padding-top:10px">Nombre</div></b> 
-              <input class="form-control" id="nombre" name="nombre" placeholder="Nombre" type="nombre">
+              <input class="form-control" [(ngModel)] = "nombreUsuario"  placeholder="Nombre.." type="text">
               <b><div align=left style="padding-top:10px">Apellido</div></b>   
-              <input class="form-control" id="apellido" name="apellido" placeholder="Mail" type="apellido">
+              <input class="form-control" [(ngModel)] = "apellido" placeholder="Mail.." type="text">
               <b><div align=left style="padding-top:10px">Cargo</div></b>   
-              <input class="form-control" id="cargo" name="cargo" placeholder="Cargo" type="cargo">
+              <input class="form-control" [(ngModel)] = "perfil" placeholder="Cargo.." type="text">
                <b><div align=left style="padding-top:10px">Calle</div></b>   
-              <input class="form-control" id="calle" name="calle" placeholder="Calle" type="calle">
+              <input class="form-control" [(ngModel)] = "calle" placeholder="Calle.." type="text">
               <b><div align=left style="padding-top:10px">Número</div></b>   
-              <input class="form-control" id="numero" name="numero" placeholder="Numero" type="numero">
+              <input class="form-control" [(ngModel)] = "numero" placeholder="Numero.." type="text">
               <b><div align=left style="padding-top:10px">Localidad</div></b>   
-              <input class="form-control" id="localidad" name="localidad" placeholder="Localidad" type="localidad">
+              <input class="form-control" [(ngModel)] = "localidad" placeholder="Mail.." type="text">
               <b><div align=left style="padding-top:10px">Teléfono</div></b>   
-              <input class="form-control" id="telefono" name="telefono" placeholder="Telefono" type="telefono">
+              <input class="form-control" [(ngModel)] = "telefono" placeholder="Teléfono.." type="text">
+              <b><div align=left style="padding-top:10px">Mail</div></b>   
+              <input class="form-control" [(ngModel)] = "mailUsuario" placeholder="Mail.." type="text">
           </modal-content>
           <modal-footer>
-              <button class="btn btn-success"(click)="modalCrearUsuario.close()"> GUARDAR </button>
-              <button class="btn btn-danger" id= "cerraBorrarUsuario"(click)="modalCrearUsuario.close()"> CANCELAR </button>
+              <button class="btn btn-success"(click)="altaUsuario()"> GUARDAR </button>
+              <button class="btn btn-danger" id= "cerrarAgregarUsuario" (click)="modalCrearUsuario.close()"> CANCELAR </button>
           </modal-footer>
       </modal>
     </div>

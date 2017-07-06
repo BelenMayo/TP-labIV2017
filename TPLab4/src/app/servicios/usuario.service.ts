@@ -32,11 +32,33 @@ export class UsuarioService {
 
   agregarUsuario(usuario) {
     let datos={ nombre:usuario.nombre,
-                apellido :usuario.apellido,
+                apellido:usuario.apellido,
                 perfil:usuario.perfil,
+                calle:usuario.calle,
+                numero:usuario.numero,
+                localidad:usuario.localidad,
+                telefono:usuario.telefono,
+                mail:usuario.mail,
               };
     
     this.http.post("http://localhost:8080/ApiLab4SP/public/index.php/usuario/alta", datos)
+             .toPromise()
+             .then()
+             .catch(this.error)
+  }
+
+  modificarUsuario(idUsuario, usuario) {
+    let datos={ nombre:usuario.nombreUsuario,
+                apellido:usuario.apellido,
+                perfil:usuario.perfil,
+                calle:usuario.calle,
+                numero:usuario.numero,
+                localidad:usuario.localidad,
+                telefono:usuario.telefono,
+                mail:usuario.mailUsuario,
+              };
+
+    this.http.put("http://localhost:8080/ApiLab4SP/public/index.php/usuario/actualizar/" + idUsuario, datos)
              .toPromise()
              .then()
              .catch(this.error)

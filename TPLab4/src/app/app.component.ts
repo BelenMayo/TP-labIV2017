@@ -65,11 +65,12 @@ export class AppComponent {
   public precioPizza= "";
   public datosPizzas: Array<any>;
 
-  public mbPizza:  "";
-  public mmIdPizza:  "";
-  public mmNombrePizza:  "";
-  public mmPrecioPizza:  "";
-  public mmFotoPizza:  "";
+  public mbPizza= "";
+  public mmIdPizza= "";
+  public mmNombrePizza= "";
+  public mmPrecioPizza= "";
+  public mmFotoPizza= "";
+  public nombrePizzaBorrar= "";
 
   //Usuario
   titleUsuario: string= 'Listado de Usuarios';
@@ -77,7 +78,25 @@ export class AppComponent {
   public nombreUsuario= "";
   public apellido= "";
   public perfil= "";
+  public calle= "";
+  public numero= "";
+  public localidad= "";
+  public telefono= "";
+  public mailUsuario= "";
   public datosUsuarios: Array<any>;
+
+  public mbNombre= "";
+  public mbApellido= "";
+
+  public mmIdUsuario= "";
+  public mmNombreUsuario= "";
+  public mmApellidoUsuario= "";
+  public mmPerfilUsuario= "";
+  public mmCalleUsuario= "";
+  public mmNumeroUsuario= "";
+  public mmLocalidadUsuario= "";
+  public mmTelefonoUsuario= "";
+  public mmMailUsuario= "";
 
   //Pedido
   titlePedido: string= 'Listado de Pedidos';
@@ -87,11 +106,13 @@ export class AppComponent {
   public total= "";
   public datosPedidos: Array<any>;
 
-  public mbPedido:  "";
-  public mmIdPedido:  "";
-  public mmUsuarioPedido:  "";
-  public mmDescripcionPedido:  "";
-  public mmTotalPedido:  "";
+  public mbPedido= "";
+  public mmIdPedido= "";
+  public mmUsuarioPedido= "";
+  public mmDescripcionPedido= "";
+  public mmTotalPedido= "";
+
+  public mbUsuario= "";
 
   //Login
   items: FirebaseListObservable<any[]>;
@@ -105,7 +126,6 @@ export class AppComponent {
   public completarCamposSignUp= "";
   usuarioLogin: Observable<firebase.User>;
   
-
   // Perfiles
   public administrador= "";
   public empleado= "";
@@ -175,8 +195,9 @@ export class AppComponent {
     })
   }
 
-  abrirModalBorrarPizza($id){
+  abrirModalBorrarPizza($id, $nombrePizza){
     this.mbPizza= $id;
+    this.nombrePizzaBorrar= $nombrePizza;
     document.getElementById("mBorrarPizza").click();
   }
 
@@ -188,7 +209,7 @@ export class AppComponent {
       var temp=this;
       setTimeout(function(){
           temp.TraerTodasLasPizzas();
-      }, 500);  
+      }, 600);  
               
   }
   
@@ -200,7 +221,6 @@ export class AppComponent {
                       foto:this.foto
                     };
 
-    console.log(this.nombre,this.precio,this.foto);
     this.datosPizz.agregarPizza(nuevaPizza);
     document.getElementById("cerrarAgregarPizza").click();
 
@@ -208,6 +228,10 @@ export class AppComponent {
       setTimeout(function(){
           temp.TraerTodasLasPizzas();
       }, 600);  
+      
+      this.nombre= "";
+      this.precio= "";
+      this.foto= "";
   }
 
   abrirModalModificarPizza($id, $nombre, $precio, $foto){
@@ -264,21 +288,103 @@ export class AppComponent {
     })
   }
 
+  abrirModalBorrarUsuario($id, $nombre, $apellido){
+    this.mbUsuario= $id;
+    this.mbNombre= $nombre;
+    this.mbApellido= $apellido;
+    document.getElementById("mBorrarUsuario").click();
+  }
+
   // Borrar Usuario
   borrarUsuario($idUsuario){
     this.datosUsu.eliminarUsuario($idUsuario);
     document.getElementById("cerrarBorrarUsuario").click();
+
+      var temp=this;
+      setTimeout(function(){
+          temp.TraerTodosLosUsuarios();
+      }, 800);  
+  }
+
+  abrirModalModificarUsuario($id, $nombre, $apellido, $perfil, $calle, $numero, $localidad, $telefono, $mail){
+    this.mmIdUsuario= $id;
+    this.mmNombreUsuario= $nombre;
+    this.mmApellidoUsuario= $apellido;
+    this.mmPerfilUsuario= $perfil;
+    this.mmCalleUsuario= $calle;
+    this.mmNumeroUsuario= $numero;
+    this.mmLocalidadUsuario= $localidad;
+    this.mmTelefonoUsuario= $telefono;
+    this.mmMailUsuario= $mail;
+    document.getElementById("mModificarUsuario").click();
   }
   
   // Guardar Usuario
   altaUsuario(){
-    let nuevoUsuario={nombre:this.id,
-                      apellido:this.nombre,
+    let nuevoUsuario={
+                      nombre:this.nombreUsuario,
+                      apellido:this.apellido,
                       perfil:this.perfil,
+                      calle:this.calle,
+                      numero:this.numero,
+                      localidad:this.localidad,
+                      telefono:this.telefono,
+                      mail:this.mailUsuario,
                     };
     this.datosUsu.agregarUsuario(nuevoUsuario);
+
+    this.idUsuario= "";
+    this.nombreUsuario= "";
+    this.apellido= "";
+    this.perfil= "";
+    this.calle= "";
+    this.numero= "";
+    this.localidad= "";
+    this.telefono= "";
+    this.mailUsuario= "";
+
     document.getElementById("cerrarAgregarUsuario").click();
+
+      var temp=this;
+      setTimeout(function(){
+          temp.TraerTodosLosUsuarios();
+      }, 600);  
+      
   }
+
+  // Modificar Usuario
+  modificarUsuario($id){
+
+    let nuevoUsuario={
+                      nombre:this.mmNombreUsuario,
+                      apellido:this.mmApellidoUsuario,
+                      perfil:this.mmPerfilUsuario,
+                      calle:this.mmCalleUsuario,
+                      numero:this.mmNumeroUsuario,
+                      localidad:this.mmLocalidadUsuario,
+                      telefono:this.mmTelefonoUsuario,
+                      mail:this.mmMailUsuario,
+                    };
+
+    this.datosPizz.modificarPizza($id, nuevoUsuario);
+
+    this.mmIdUsuario= "";
+    this.mmNombreUsuario= "";
+    this.mmApellidoUsuario= "";
+    this.mmPerfilUsuario= "";
+    this.mmCalleUsuario= "";
+    this.mmNumeroUsuario= "";
+    this.mmLocalidadUsuario= "";
+    this.mmTelefonoUsuario= "";
+    this.mmMailUsuario= "";
+    document.getElementById("cerrarModificarUsuario").click();
+
+        var temp=this;
+          setTimeout(function(){
+          temp.TraerTodosLosUsuarios();
+        }, 600);  
+
+    }
 
 /////////////////////////////////////////////////////////////////////// ABM PEDIDO
 
@@ -330,7 +436,11 @@ export class AppComponent {
         var temp=this;
           setTimeout(function(){
           temp.TraerTodosLosPedidos();
-        }, 700);  
+        }, 600);  
+
+    this.usuario= "";
+    this.descripcion= "";
+    this.total= "";
   }
 
   abrirModalModificarPedido($id, $usuario, $descripcion, $total){
