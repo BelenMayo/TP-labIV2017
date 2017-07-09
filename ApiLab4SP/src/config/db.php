@@ -1,10 +1,15 @@
 <?php
 
 class db{
-    private $host = 'localhost';
+    /*private $host = 'localhost';
     private $usuario = 'root';
     private $password = '';
-    private $base = 'pizzeria';
+    private $base = 'pizzeria';*/
+	
+	private $host = 'mysql.hostinger.com.ar';
+    private $usuario = 'u350095586_belen';
+    private $password = 'bel123456';
+    private $base = 'u350095586_pizza';
 
     //conectar BD
     public function conectar(){

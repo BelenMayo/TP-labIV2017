@@ -11,7 +11,8 @@ export class PedidoService {
 ////////////////////////////////////////////////////////////////////////////// USUARIO
 
   traerTodosLosPedidos(){
-    let url= 'http://localhost:8080/ApiLab4SP/public/index.php/pedidos'; 
+    // let url= 'http://localhost:8080/ApiLab4SP/public/index.php/pedidos';
+	let url= 'http://tplab42017.hol.es/ApiLab4SP/public/index.php/pedidos';	
     
       return this.http
         .get(url)
@@ -21,8 +22,9 @@ export class PedidoService {
   }
 
   traerUnPedido(idPedido){
-    let url= 'http://localhost:8080/ApiLab4SP/public/index.php/pedido' + idPedido; 
-    
+    // let url= 'http://localhost:8080/ApiLab4SP/public/index.php/pedido' + idPedido; 
+	let url= 'http://tplab42017.hol.es/ApiLab4SP/public/index.php/pedido' + idPedido;
+  
       return this.http
         .get(url)
         .toPromise()
@@ -36,7 +38,8 @@ export class PedidoService {
                 total:pedido.total,
               };
     
-    this.http.post("http://localhost:8080/ApiLab4SP/public/index.php/pedido/alta", datos)
+    // this.http.post("http://localhost:8080/ApiLab4SP/public/index.php/pedido/alta", datos)
+	this.http.post("http://tplab42017.hol.es/ApiLab4SP/public/index.php/pedido/alta", datos)
              .toPromise()
              .then()
              .catch(this.error)
@@ -49,7 +52,8 @@ export class PedidoService {
                 id:pedido.id
               };
 
-    this.http.put("http://localhost:8080/ApiLab4SP/public/index.php/pedido/actualizar/" + idPedido, datos)
+    // this.http.put("http://localhost:8080/ApiLab4SP/public/index.php/pedido/actualizar/" + idPedido, datos)
+	this.http.put("http://tplab42017.hol.es/ApiLab4SP/public/index.php/pedido/actualizar/" + idPedido, datos)
              .toPromise()
              .then()
              .catch(this.error)
@@ -63,7 +67,8 @@ export class PedidoService {
     body : datos
   });
     
-    this.http.delete("http://localhost:8080/ApiLab4SP/public/index.php/pedido/borrar/" + idPedido)
+    // this.http.delete("http://localhost:8080/ApiLab4SP/public/index.php/pedido/borrar/" + idPedido)
+	this.http.delete("http://tplab42017.hol.es/ApiLab4SP/public/index.php/pedido/borrar/" + idPedido)
              .toPromise()
              .then()
              .catch(this.error)

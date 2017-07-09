@@ -251,6 +251,7 @@ export class AppComponent {
                       foto:this.mmFotoPizza
                     };
 
+    console.log($id);
     this.datosPizz.modificarPizza($id, nuevaPizza);
 
       this.mmIdPizza= "";

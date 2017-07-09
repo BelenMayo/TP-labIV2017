@@ -11,7 +11,8 @@ export class UsuarioService {
 
   traerTodosLosUsuarios(){
     //URL de API REST(funciones.js)
-    let url= 'http://localhost:8080/ApiLab4SP/public/index.php/usuarios'; 
+    // let url= 'http://localhost:8080/ApiLab4SP/public/index.php/usuarios'; 
+	let url= 'http://tplab42017.hol.es/ApiLab4SP/public/index.php/usuarios';
     
       return this.http
         .get(url)
@@ -21,7 +22,8 @@ export class UsuarioService {
   }
 
   traerUnUsuario(idUsuario){
-    let url= 'http://localhost:8080/ApiLab4SP/public/index.php/usuario' + idUsuario; 
+    // let url= 'http://localhost:8080/ApiLab4SP/public/index.php/usuario' + idUsuario; 
+	let url= 'http://tplab42017.hol.es/ApiLab4SP/public/index.php/usuario' + idUsuario;
     
       return this.http
         .get(url)
@@ -41,7 +43,8 @@ export class UsuarioService {
                 mail:usuario.mail,
               };
     
-    this.http.post("http://localhost:8080/ApiLab4SP/public/index.php/usuario/alta", datos)
+    // this.http.post("http://localhost:8080/ApiLab4SP/public/index.php/usuario/alta", datos)
+	this.http.post("http://tplab42017.hol.es/ApiLab4SP/public/index.php/usuario/alta", datos)
              .toPromise()
              .then()
              .catch(this.error)
@@ -58,7 +61,8 @@ export class UsuarioService {
                 mail:usuario.mailUsuario,
               };
 
-    this.http.put("http://localhost:8080/ApiLab4SP/public/index.php/usuario/actualizar/" + idUsuario, datos)
+    // this.http.put("http://localhost:8080/ApiLab4SP/public/index.php/usuario/actualizar/" + idUsuario, datos)
+	this.http.put("http://tplab42017.hol.es/ApiLab4SP/public/index.php/usuario/actualizar/" + idUsuario, datos)
              .toPromise()
              .then()
              .catch(this.error)
@@ -72,7 +76,8 @@ export class UsuarioService {
     body : datos
   });
     
-    this.http.delete("http://localhost:8080/ApiLab4SP/public/index.php/usuario/borrar/" + idUsuario)
+    // this.http.delete("http://localhost:8080/ApiLab4SP/public/index.php/usuario/borrar/" + idUsuario)
+	this.http.delete("http://tplab42017.hol.es/ApiLab4SP/public/index.php/usuario/borrar/" + idUsuario)
              .toPromise()
              .then()
              .catch(this.error)

@@ -11,7 +11,8 @@ export class PizzeriaService {
 
   traerTodasLasPizzas(){
     //URL de API REST(funciones.js)
-    let url= 'http://localhost:8080/ApiLab4SP/public/index.php/pizzas'; 
+    // let url= 'http://localhost:8080/ApiLab4SP/public/index.php/pizzas';
+	let url= 'http://tplab42017.hol.es/ApiLab4SP/public/index.php/pizzas';	
     
       return this.http
         .get(url)
@@ -21,7 +22,8 @@ export class PizzeriaService {
   }
 
   traerUnaPizza(idPizza){
-    let url= 'http://localhost:8080/ApiLab4SP/public/index.php/pizza' + idPizza; 
+    // let url= 'http://localhost:8080/ApiLab4SP/public/index.php/pizza' + idPizza; 
+	let url= 'http://tplab42017.hol.es/ApiLab4SP/public/index.php/pizza' + idPizza;
     
       return this.http
         .get(url)
@@ -36,7 +38,8 @@ export class PizzeriaService {
                 foto:pizza.foto,
               };
     
-    this.http.post("http://localhost:8080/ApiLab4SP/public/index.php/pizza/alta", datos)
+    // this.http.post("http://localhost:8080/ApiLab4SP/public/index.php/pizza/alta", datos)
+	this.http.post("http://tplab42017.hol.es/ApiLab4SP/public/index.php/pizza/alta", datos)
              .toPromise()
              .then()
              .catch(this.error)
@@ -49,7 +52,8 @@ export class PizzeriaService {
                 id:idPizza
               };
 
-    this.http.put("http://localhost:8080/ApiLab4SP/public/index.php/pizza/actualizar/" + idPizza, datos)
+    // this.http.put("http://localhost:8080/ApiLab4SP/public/index.php/pizza/actualizar/" + idPizza, datos)
+	this.http.put("http://tplab42017.hol.es/ApiLab4SP/public/index.php/pizza/actualizar/" + idPizza, datos)
              .toPromise()
              .then()
              .catch(this.error)
@@ -63,7 +67,8 @@ export class PizzeriaService {
     body : datos
   });
     
-    this.http.delete("http://localhost:8080/ApiLab4SP/public/index.php/pizza/borrar/" + idPizza)
+    // this.http.delete("http://localhost:8080/ApiLab4SP/public/index.php/pizza/borrar/" + idPizza)
+	this.http.delete("http://tplab42017.hol.es/ApiLab4SP/public/index.php/pizza/borrar/" + idPizza)
              .toPromise()
              .then()
              .catch(this.error)
